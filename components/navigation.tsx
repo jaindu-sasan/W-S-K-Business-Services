@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, CreditCard } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Navigation() {
@@ -25,7 +25,7 @@ export function Navigation() {
     { name: 'Tax Calculator', href: '/tax-calculator' },
     { name: 'Projects', href: '/projects' },
     { name: 'Blog', href: '/blog' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Contact', href: '/contact' }
   ];
 
   return (
@@ -59,11 +59,21 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Pay Online button */}
+            <Link
+              href="/Payment_portal"
+              className="border border-accent text-accent px-5 py-2 rounded-lg font-semibold hover:bg-accent/10 transition-colors flex items-center gap-2 text-sm"
+            >
+              <CreditCard className="w-4 h-4" />
+              Pay Online
+            </Link>
+
+            {/* Get Help button */}
             <Link
               href="/contact"
-              className="bg-accent text-primary px-6 py-2 rounded-lg font-semibold hover:bg-accent/90 transition-colors flex items-center gap-2"
+              className="bg-accent text-primary px-6 py-2 rounded-lg font-semibold hover:bg-accent/90 transition-colors flex items-center gap-2 text-sm"
             >
               <Phone className="w-4 h-4" />
               Get Help
@@ -100,9 +110,21 @@ export function Navigation() {
                 {link.name}
               </Link>
             ))}
+
+            {/* Pay Online — mobile */}
+            <Link
+              href="/payment"
+              className="flex items-center justify-center gap-2 border border-accent text-accent px-6 py-2 rounded-lg font-semibold hover:bg-accent/10 transition-colors mt-4 text-center"
+              onClick={() => setIsOpen(false)}
+            >
+              <CreditCard className="w-4 h-4" />
+              Pay Online
+            </Link>
+
+            {/* Get Help — mobile */}
             <Link
               href="/contact"
-              className="block bg-accent text-primary px-6 py-2 rounded-lg font-semibold hover:bg-accent/90 transition-colors mt-4 text-center"
+              className="block bg-accent text-primary px-6 py-2 rounded-lg font-semibold hover:bg-accent/90 transition-colors text-center"
               onClick={() => setIsOpen(false)}
             >
               Get Help
