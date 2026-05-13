@@ -41,19 +41,30 @@ export function Navigation() {
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4A017] text-sm font-bold text-white shadow-md">
             WSK
           </div>
+
+          <h2 className="text-xl font-bold text-[#0B1F3A]">WSK</h2>
         </Link>
 
-        {/* DESKTOP LINKS */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* DESKTOP MENU */}
+        <div className="hidden lg:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-[#0B1F3A] hover:text-[#D4A017] transition"
+            >
+              {link.name}
+            </Link>
+          ))}
+
+          {/* PAYMENT BUTTON (kept feature) */}
           <Link
-            href="/payment"
-            className="border border-accent text-accent px-5 py-2 rounded-lg font-semibold hover:bg-accent/10 transition-colors flex items-center gap-2 text-sm"
+            href="/Payment_portal"
+            className="flex items-center gap-2 border border-[#D4A017] text-[#D4A017] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#D4A017]/10 transition"
           >
             <CreditCard className="w-4 h-4" />
             Pay Online
           </Link>
-
- 
         </div>
 
         {/* CTA */}
@@ -100,32 +111,26 @@ export function Navigation() {
                 </Link>
               ))}
 
+              {/* PAYMENT (mobile kept) */}
               <Link
-                href="/contact"
+                href="/Payment_portal"
                 onClick={() => setIsOpen(false)}
-                className="mt-6 inline-flex items-center justify-center gap-3 rounded-full bg-[#D4A017] px-6 py-4 font-semibold text-[#0B1F3A]"
-              >
-                Contact Us
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
-                  <ArrowRight size={16} />
-                </span>
-              </Link>
-
-              <Link
-                href="/payment"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-2 border border-accent text-accent px-6 py-2 rounded-lg font-semibold hover:bg-accent/10 mt-4"
+                className="mt-5 flex items-center justify-center gap-2 border border-[#D4A017] text-[#D4A017] px-6 py-3 rounded-lg font-semibold"
               >
                 <CreditCard className="w-4 h-4" />
                 Pay Online
               </Link>
 
+              {/* CONTACT CTA */}
               <Link
                 href="/contact"
                 onClick={() => setIsOpen(false)}
-                className="block bg-accent text-primary px-6 py-2 rounded-lg font-semibold hover:bg-accent/90 text-center mt-2"
+                className="mt-4 inline-flex items-center justify-center gap-3 rounded-full bg-[#D4A017] px-6 py-4 font-semibold text-[#0B1F3A]"
               >
-                Get Help
+                Contact Us
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
+                  <ArrowRight size={16} />
+                </span>
               </Link>
             </div>
           </motion.div>
