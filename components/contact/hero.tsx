@@ -8,8 +8,8 @@ export function ContactHero() {
     {
       icon: Phone,
       label: 'Phone',
-      value: '(123) 456-7890',
-      href: 'tel:+1234567890',
+      value: '011 5044 433',
+      href: 'tel:+115044433',
     },
     {
       icon: Mail,
@@ -20,13 +20,13 @@ export function ContactHero() {
     {
       icon: MapPin,
       label: 'Office',
-      value: '123 Business St, Suite 100',
+      value: 'No. 329/1 Nawala Rd, Sri Jayawardenepura Kotte',
       href: '#',
     },
     {
       icon: Clock,
       label: 'Hours',
-      value: 'Mon-Fri: 9 AM - 6 PM',
+      value: 'Monday to Friday: 8:30 AM - 5:00 PM',
       href: '#',
     },
   ];
@@ -42,7 +42,6 @@ export function ContactHero() {
         >
           <div className="inline-block">
             <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2">
-              <span className="text-2xl">📧</span>
               <span className="text-sm font-medium text-foreground">Get in Touch</span>
             </div>
           </div>
@@ -56,7 +55,6 @@ export function ContactHero() {
           </p>
         </motion.div>
 
-        {/* Contact Info Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,6 +64,7 @@ export function ContactHero() {
         >
           {contactInfo.map((info, index) => {
             const Icon = info.icon;
+
             return (
               <motion.a
                 key={info.label}
