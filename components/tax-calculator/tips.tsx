@@ -3,36 +3,36 @@
 import { motion } from 'framer-motion';
 
 export function TaxTips() {
-  const tips = [
+  const notes = [
     {
-      title: 'Maximize Deductions',
-      description: 'Keep detailed records of business expenses, medical costs, and charitable contributions to maximize your deductions.',
-      icon: '📝',
+      title: 'Regular Profits Definition',
+      description:
+        'Include salary, wages, overtime, allowances, commissions, pension, non-cash benefits, and qualifying third-party payments.',
     },
     {
-      title: 'Use Tax-Advantaged Accounts',
-      description: 'Contribute to 401(k), IRA, HSA, and other tax-advantaged accounts to reduce your taxable income.',
-      icon: '🏦',
+      title: 'Personal Relief Already Included',
+      description:
+        'Tax Table No. 01 already includes Rs. 150,000 monthly personal relief. Do not deduct any extra amount before applying the table.',
     },
     {
-      title: 'Plan Quarterly Taxes',
-      description: 'If self-employed, make quarterly estimated tax payments to avoid penalties and interest.',
-      icon: '📅',
+      title: 'When To Use Table 05',
+      description:
+        'Use Table No. 05 if the employee joined/retired during the year, or if monthly regular profits are below Rs. 150,000 but cumulative profits exceed Rs. 1,800,000.',
     },
     {
-      title: 'Consider Business Structure',
-      description: 'The right business entity (LLC, S-Corp, etc.) can significantly reduce your tax burden.',
-      icon: '🏢',
+      title: 'When To Use Table 02',
+      description:
+        'Use Table No. 02 for salary arrears and lump-sum payments from employment.',
     },
     {
-      title: 'Time Your Income & Expenses',
-      description: 'Strategic timing of income recognition and expense deduction can optimize your tax position.',
-      icon: '⏰',
+      title: 'When To Use Table 03',
+      description:
+        'Use Table No. 03 for once-and-for-all payments.',
     },
     {
-      title: 'Get Professional Help',
-      description: 'A tax professional can identify opportunities you might miss and ensure compliance.',
-      icon: '👨‍💼',
+      title: 'Mandatory Deduction',
+      description:
+        'Employers must deduct tax according to the relevant table regardless of employee consent.',
     },
   ];
 
@@ -46,27 +46,24 @@ export function TaxTips() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            Tax Savings Tips
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">Key APIT Rules</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Strategic approaches to reduce your tax liability
+            Quick reference points from Tax Table No. 01 guidance
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {tips.map((tip, index) => (
+          {notes.map((note, index) => (
             <motion.div
-              key={tip.title}
+              key={note.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: index * 0.05 }}
               className="bg-background border border-border rounded-lg p-6 hover:border-accent hover:shadow-lg transition-all"
             >
-              <div className="text-4xl mb-4">{tip.icon}</div>
-              <h3 className="text-lg font-bold text-primary mb-2">{tip.title}</h3>
-              <p className="text-muted-foreground text-sm">{tip.description}</p>
+              <h3 className="text-lg font-bold text-primary mb-2">{note.title}</h3>
+              <p className="text-muted-foreground text-sm">{note.description}</p>
             </motion.div>
           ))}
         </div>

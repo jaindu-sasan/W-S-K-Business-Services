@@ -1,175 +1,192 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 
+const numberFormatter = new Intl.NumberFormat('en-LK');
+const moneyFormatter = new Intl.NumberFormat('en-LK', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+const formatNumber = (value: number) => numberFormatter.format(value);
+const formatMoney = (value: number) => `Rs. ${moneyFormatter.format(value)}`;
+
+type SlabRow = {
+  label: string;
+  rateLabel: string;
+  taxable: number;
+  tax: number;
+  showTax: boolean;
+};
+
+const parseIncome = (input: string) => {
+  const cleaned = input.replace(/[^\d]/g, '');
+  if (!cleaned) return 0;
+  return Number(cleaned);
+};
+
 export function Calculator() {
-  const [income, setIncome] = useState(75000);
-  const [fillingStatus, setFilingStatus] = useState('single');
-  const [deductions, setDeductions] = useState(12950);
-  const [dependents, setDependents] = useState(0);
+  const [incomeInput, setIncomeInput] = useState('8000000');
 
-  // Simple tax calculation (2024 tax brackets for demonstration)
-  const calculateTax = () => {
-    const taxableIncome = Math.max(0, income - deductions);
-    let tax = 0;
+  const monthlyIncome = useMemo(() => parseIncome(incomeInput), [incomeInput]);
 
-    if (fillingStatus === 'single') {
-      if (taxableIncome > 191950) tax = 46440.75 + (taxableIncome - 191950) * 0.37;
-      else if (taxableIncome > 100525) tax = 18096 + (taxableIncome - 100525) * 0.32;
-      else if (taxableIncome > 47150) tax = 5219.50 + (taxableIncome - 47150) * 0.22;
-      else if (taxableIncome > 11600) tax = 1160 + (taxableIncome - 11600) * 0.12;
-      else if (taxableIncome > 0) tax = taxableIncome * 0.10;
-    } else {
-      if (taxableIncome > 243725) tax = 56302.50 + (taxableIncome - 243725) * 0.37;
-      else if (taxableIncome > 182100) tax = 20550 + (taxableIncome - 182100) * 0.32;
-      else if (taxableIncome > 94300) tax = 10852 + (taxableIncome - 94300) * 0.22;
-      else if (taxableIncome > 23200) tax = 2320 + (taxableIncome - 23200) * 0.12;
-      else if (taxableIncome > 0) tax = taxableIncome * 0.10;
+  const { annualIncome, monthlyTax, annualTax, rows } = useMemo(() => {
+    const monthly = Math.max(0, monthlyIncome);
+    const annual = monthly * 12;
+
+    // Tax Table No. 01 progressive monthly slabs.
+    const slabs = [
+      { label: 'Up to 150,000', width: 150000, rate: 0, rateLabel: 'Relief' },
+      { label: 'First 83,333 LKR', width: 83333, rate: 0.06, rateLabel: '6%' },
+      { label: 'Next 41,667 LKR', width: 41667, rate: 0.18, rateLabel: '18%' },
+      { label: 'Next 41,667 LKR', width: 41667, rate: 0.24, rateLabel: '24%' },
+      { label: 'Next 41,666 LKR', width: 41666, rate: 0.3, rateLabel: '30%' },
+    ];
+
+    let remaining = monthly;
+    const taxRows: SlabRow[] = [];
+    let totalMonthlyTax = 0;
+
+    for (const slab of slabs) {
+      const taxable = Math.max(0, Math.min(remaining, slab.width));
+      const tax = taxable * slab.rate;
+      totalMonthlyTax += tax;
+
+      taxRows.push({
+        label: slab.label,
+        rateLabel: slab.rateLabel,
+        taxable,
+        tax,
+        showTax: slab.rate > 0,
+      });
+
+      remaining -= taxable;
     }
 
-    const childCredit = dependents * 2000;
-    const finalTax = Math.max(0, tax - childCredit);
-    const effectiveRate = income > 0 ? ((finalTax / income) * 100).toFixed(2) : '0.00';
+    const balanceTaxable = Math.max(0, remaining);
+    const balanceTax = balanceTaxable * 0.36;
+    totalMonthlyTax += balanceTax;
 
-    return { tax: Math.round(finalTax), taxRate: effectiveRate };
+    taxRows.push({
+      label: `Balance ${formatNumber(balanceTaxable)} LKR`,
+      rateLabel: '36%',
+      taxable: balanceTaxable,
+      tax: balanceTax,
+      showTax: balanceTaxable > 0,
+    });
+
+    const roundedMonthlyTax = Math.round(totalMonthlyTax * 100) / 100;
+    const roundedAnnualTax = Math.round(roundedMonthlyTax * 12 * 100) / 100;
+
+    return {
+      annualIncome: annual,
+      monthlyTax: roundedMonthlyTax,
+      annualTax: roundedAnnualTax,
+      rows: taxRows,
+    };
+  }, [monthlyIncome]);
+
+  const handleIncomeChange = (value: string) => {
+    const raw = value.replace(/[^\d]/g, '');
+    setIncomeInput(raw);
   };
 
-  const { tax, taxRate } = calculateTax();
-  const averageTaxPerMonth = Math.round(tax / 12);
+  const handleReset = () => {
+    setIncomeInput('');
+  };
+
+  const visibleRows = useMemo(() => {
+    // Show only relevant slabs that actually participate in the current calculation.
+    // Keep relief row only when income is within relief band.
+    return rows.filter((row) => row.taxable > 0 || (row.rateLabel === 'Relief' && monthlyIncome <= 150000));
+  }, [rows, monthlyIncome]);
 
   return (
-    <section className="py-20 md:py-28 bg-background">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 md:py-14 bg-background">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
-          {/* Input Form */}
-          <Card className="p-8 border-border">
-            <h2 className="text-2xl font-bold text-primary mb-6">Enter Your Information</h2>
+          <Card className="p-4 md:p-5 border-border/80 shadow-md gap-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary text-center">Local Tax Calculator</h2>
 
-            <div className="space-y-6">
-              {/* Annual Income */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-3">
-                  Annual Gross Income
-                </label>
-                <input
-                  type="number"
-                  value={income}
-                  onChange={(e) => setIncome(Number(e.target.value))}
-                  className="w-full px-4 py-2 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-accent"
-                />
-                <p className="text-sm text-muted-foreground mt-2">
-                  ${income.toLocaleString()}
-                </p>
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-foreground">Monthly Income (LKR)</label>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={incomeInput ? formatNumber(parseIncome(incomeInput)) : ''}
+                onChange={(e) => handleIncomeChange(e.target.value)}
+                placeholder="Enter monthly income"
+                className="h-11 w-full rounded-md border border-orange-400 bg-background px-3 text-foreground outline-none focus:border-accent"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="rounded-lg border border-border bg-muted/20 p-3 space-y-2">
+                <div>
+                  <p className="text-sm text-muted-foreground">Monthly Income (LKR)</p>
+                  <p className="text-3xl font-bold text-primary">{formatMoney(monthlyIncome)}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Monthly Tax (LKR)</p>
+                  <p className="text-2xl font-bold text-primary">{formatMoney(monthlyTax)}</p>
+                </div>
+              </div>
+              <div className="rounded-lg border border-border bg-muted/20 p-3 space-y-2">
+                <div>
+                  <p className="text-sm text-muted-foreground">Annual Income (LKR)</p>
+                  <p className="text-3xl font-bold text-primary">{formatMoney(annualIncome)}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Annual Tax (LKR)</p>
+                  <p className="text-2xl font-bold text-primary">{formatMoney(annualTax)}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-border overflow-hidden">
+              <div className="grid grid-cols-[1.6fr_0.8fr_0.8fr] bg-muted/20 border-b border-border">
+                <div className="p-3 text-sm font-semibold text-foreground">Monthly Salary (Annual Salary/12)</div>
+                <div className="p-3 text-sm font-semibold text-foreground">Rate (%)</div>
+                <div className="p-3 text-sm font-semibold text-foreground text-right">Tax</div>
               </div>
 
-              {/* Filing Status */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-3">
-                  Filing Status
-                </label>
-                <select
-                  value={fillingStatus}
-                  onChange={(e) => setFilingStatus(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-accent"
+              {visibleRows.map((row, index) => (
+                <div
+                  key={`${row.label}-${index}`}
+                  className="grid grid-cols-[1.6fr_0.8fr_0.8fr] border-b last:border-b-0 border-border"
                 >
-                  <option value="single">Single</option>
-                  <option value="married">Married Filing Jointly</option>
-                </select>
-              </div>
+                  <div className="p-3 text-sm text-foreground">{row.label}</div>
+                  <div className="p-3 text-sm text-foreground">{row.rateLabel}</div>
+                  <div className="p-3 text-sm text-foreground text-right">
+                    {row.showTax ? formatMoney(row.tax) : '-'}
+                  </div>
+                </div>
+              ))}
 
-              {/* Standard Deduction */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-3">
-                  Deductions
-                </label>
-                <input
-                  type="number"
-                  value={deductions}
-                  onChange={(e) => setDeductions(Number(e.target.value))}
-                  className="w-full px-4 py-2 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-accent"
-                />
-                <p className="text-xs text-muted-foreground mt-2">
-                  2024 Standard Deduction: {fillingStatus === 'single' ? '$14,600' : '$29,200'}
-                </p>
+              <div className="grid grid-cols-[1.6fr_0.8fr_0.8fr] bg-muted/20 border-t border-border">
+                <div className="p-3 text-sm font-bold text-foreground">Monthly Total</div>
+                <div className="p-3" />
+                <div className="p-3 text-sm font-bold text-foreground text-right">{formatMoney(monthlyTax)}</div>
               </div>
+            </div>
 
-              {/* Dependents */}
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-3">
-                  Number of Dependents
-                </label>
-                <input
-                  type="number"
-                  value={dependents}
-                  onChange={(e) => setDependents(Number(e.target.value))}
-                  min="0"
-                  max="10"
-                  className="w-full px-4 py-2 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-accent"
-                />
-                <p className="text-sm text-muted-foreground mt-2">
-                  Child Tax Credit: ${(dependents * 2000).toLocaleString()}
-                </p>
-              </div>
+            <div className="flex justify-center pt-1">
+              <button
+                type="button"
+                onClick={handleReset}
+                className="rounded-md border border-orange-400 px-6 py-2 text-sm font-medium text-orange-600 hover:bg-orange-50 transition-colors"
+              >
+                Reset Calculator
+              </button>
             </div>
           </Card>
-
-          {/* Results */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-4"
-          >
-            {/* Main Result Card */}
-            <Card className="p-8 bg-gradient-to-br from-accent/10 to-primary/10 border-accent/20">
-              <p className="text-sm text-muted-foreground mb-2">Estimated Annual Tax Liability</p>
-              <div className="text-5xl font-bold text-primary mb-4">
-                ${tax.toLocaleString()}
-              </div>
-              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border">
-                <div>
-                  <p className="text-xs text-muted-foreground">Effective Tax Rate</p>
-                  <p className="text-2xl font-bold text-accent">{taxRate}%</p>
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Monthly Tax</p>
-                  <p className="text-2xl font-bold text-accent">
-                    ${averageTaxPerMonth.toLocaleString()}
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            {/* Info Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="p-4 border-border">
-                <p className="text-xs text-muted-foreground mb-2">Taxable Income</p>
-                <p className="text-lg font-bold text-primary">
-                  ${Math.max(0, income - deductions).toLocaleString()}
-                </p>
-              </Card>
-              <Card className="p-4 border-border">
-                <p className="text-xs text-muted-foreground mb-2">Income After Tax</p>
-                <p className="text-lg font-bold text-primary">
-                  ${(income - tax).toLocaleString()}
-                </p>
-              </Card>
-            </div>
-
-            {/* Disclaimer */}
-            <p className="text-xs text-muted-foreground">
-              This is a simplified estimate. Actual tax liability may vary based on additional factors. Consult with a tax professional for personalized guidance.
-            </p>
-          </motion.div>
         </motion.div>
       </div>
     </section>
