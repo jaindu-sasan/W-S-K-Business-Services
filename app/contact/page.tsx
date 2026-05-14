@@ -3,6 +3,7 @@
 import { Navigation } from '@/components/navigation';
 import { ContactHero } from '@/components/contact/hero';
 import { ContactForm } from '@/components/contact/form';
+import { ContactMap } from '@/components/contact/map';
 import { Footer } from '@/components/footer';
 
 export default function ContactPage() {
@@ -11,6 +12,7 @@ export default function ContactPage() {
       <Navigation />
       <ContactHero />
       <ContactForm />
+      <ContactMap />
       <Footer />
     </main>
   );
