@@ -3,248 +3,354 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-type Bank = {
+type BankAccount = {
   name: string;
-  branch: string;
+  displayName?: string;
+  logo?: string;
+  logoAlt?: string;
+  branch?: string;
   accountNo: string;
-  accountType: string;
-  holder: string;
-};
-
-type ForeignBank = {
-  name: string;
-  accountNo: string;
+  accountType?: string;
+  holder?: string;
   swift?: string;
   aba?: string;
   note?: string;
+  tag?: string;
 };
 
-const localBanks: Bank[] = [
+const ACCOUNT_HOLDER = 'WSK BUSINESS SERVICES';
+
+const localBanks: BankAccount[] = [
   {
     name: 'Commercial Bank',
+    logo: '/bank-logos/commercial-bank.png',
     branch: 'Nawala',
-    accountNo: '1101013945',
+    accountNo: 'XXXXX',
     accountType: 'Current',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
   {
-    name: 'HNB Bank',
+    name: 'Hatton National Bank',
+    displayName: 'HNB Bank',
+    logo: '/bank-logos/hnb.png',
     branch: 'Battaramulla',
-    accountNo: '085010029609',
+    accountNo: 'XXXXX',
     accountType: 'Current',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
   {
     name: 'Sampath Bank',
+    logo: '/bank-logos/sampath-bank.png',
     branch: 'Battaramulla',
-    accountNo: '006110011456',
+    accountNo: 'XXXXX',
     accountType: 'Current',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
   {
     name: 'NDB Bank',
+    logo: '/bank-logos/ndb-bank.png',
     branch: 'Rajagiriya',
-    accountNo: '106003236733',
+    accountNo: 'XXXXX',
     accountType: 'Savings',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
   {
-    name: 'NTB (Nations Trust Bank)',
+    name: 'Nations Trust Bank',
+    displayName: 'NTB Bank',
+    logo: '/bank-logos/nations-trust-bank.png',
     branch: 'Nawala',
-    accountNo: '100270001377',
+    accountNo: 'XXXXX',
     accountType: 'Savings',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
   {
     name: 'Bank of Ceylon',
+    logo: '/bank-logos/bank-of-ceylon.png',
     branch: 'Battaramulla',
-    accountNo: '87799032',
+    accountNo: 'XXXXX',
     accountType: 'Savings',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
   {
     name: "People's Bank",
+    logo: '/bank-logos/peoples-bank.png',
     branch: 'Battaramulla',
-    accountNo: '208200110047561',
+    accountNo: 'XXXXX',
     accountType: 'Savings',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
   {
     name: 'Seylan Bank',
+    logo: '/bank-logos/seylan-bank.png',
     branch: 'Battaramulla',
-    accountNo: '101013080078108',
+    accountNo: 'XXXXX',
     accountType: 'Savings',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
   {
     name: 'Cargills Bank',
+    logo: '/bank-logos/cargills-bank.png',
     branch: 'Rajagiriya',
-    accountNo: '020103000030',
+    accountNo: 'XXXXX',
     accountType: 'Current',
-    holder: 'Business Eye Management Services (Pvt) Ltd',
+    holder: ACCOUNT_HOLDER,
   },
 ];
 
-const foreignBanks: ForeignBank[] = [
+const foreignBanks: BankAccount[] = [
   {
-    name: 'Metropolitan Commercial Bank (USA)',
-    accountNo: '8799040455',
-    swift: 'MCBEUS33',
-    aba: '026013356',
-    note: 'Accepts payments from any country (USD)',
+    name: 'Metropolitan Commercial Bank',
+    displayName: 'Metropolitan Commercial Bank USA',
+    logo: '/bank-logos/metropolitan-commercial-bank.png',
+    accountNo: 'XXXXX',
+    swift: 'XXXXX',
+    aba: 'XXXXX',
+    note: 'Demo account details only. Replace with real details when required.',
+    tag: 'USD receiving account',
   },
   {
-    name: 'First Century Bank (USA)',
-    accountNo: '4028078828854',
-    note: 'Only for payments within the USA',
+    name: 'First Century Bank',
+    displayName: 'First Century Bank USA',
+    logo: '/bank-logos/first-century-bank.png',
+    accountNo: 'XXXXX',
+    note: 'Demo account details only. Replace with real details when required.',
+    tag: 'USA payments only',
   },
 ];
 
 const currencies = ['USD', 'GBP', 'AUD', 'SGD', 'Payoneer'];
 
+function getInitials(name: string) {
+  return name
+    .replace(/\(.*?\)/g, '')
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 3)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
+}
+
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    window.setTimeout(() => setCopied(false), 1600);
   };
 
   return (
     <button
+      type="button"
       onClick={handleCopy}
-      className="text-xs px-2 py-1 rounded border border-border text-muted-foreground hover:text-accent hover:border-accent transition-colors"
+      className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold text-muted-foreground transition hover:border-accent hover:text-accent"
     >
-      {copied ? '✓ Copied' : 'Copy'}
+      {copied ? 'Copied' : 'Copy'}
     </button>
+  );
+}
+
+function BankLogo({ bank }: { bank: BankAccount }) {
+  const [hasError, setHasError] = useState(false);
+  const initials = getInitials(bank.displayName || bank.name);
+
+  return (
+    <div className="flex h-14 w-20 shrink-0 items-center justify-center rounded-xl border border-border bg-white p-2 shadow-sm">
+      {bank.logo && !hasError ? (
+        <img
+          src={bank.logo}
+          alt={bank.logoAlt || `${bank.name} logo`}
+          className="max-h-10 max-w-full object-contain"
+          onError={() => setHasError(true)}
+        />
+      ) : (
+        <span className="text-sm font-black tracking-tight text-primary">
+          {initials}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function InfoLine({
+  label,
+  value,
+  copyable = false,
+}: {
+  label: string;
+  value?: string;
+  copyable?: boolean;
+}) {
+  if (!value) return null;
+
+  return (
+    <div className="flex flex-col gap-1 border-t border-border/70 py-3 sm:flex-row sm:items-center sm:justify-between">
+      <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        {label}
+      </span>
+
+      <div className="flex items-center gap-2 sm:justify-end">
+        <span className="text-sm font-semibold text-foreground sm:text-right">
+          {value}
+        </span>
+
+        {copyable && <CopyButton text={value} />}
+      </div>
+    </div>
+  );
+}
+
+function CommonBankCard({
+  bank,
+  index,
+  variant = 'local',
+}: {
+  bank: BankAccount;
+  index: number;
+  variant?: 'local' | 'foreign';
+}) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay: index * 0.04 }}
+      className="rounded-2xl border border-border bg-card p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
+    >
+      <div className="flex items-start gap-4">
+        <BankLogo bank={bank} />
+
+        <div className="min-w-0 flex-1">
+          <h4 className="truncate text-base font-bold text-primary">
+            {bank.displayName || bank.name}
+          </h4>
+
+          <p className="mt-1 text-sm text-muted-foreground">
+            {variant === 'local'
+              ? `${bank.branch} Branch · ${bank.accountType} Account`
+              : bank.tag || 'Foreign currency payment account'}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-4">
+        <InfoLine label="Account No" value={bank.accountNo} />
+        <InfoLine label="SWIFT Code" value={bank.swift} />
+        <InfoLine label="Fedwire ABA" value={bank.aba} />
+        <InfoLine label="Account Holder" value={bank.holder} />
+      </div>
+
+      {bank.note && (
+        <p className="mt-2 rounded-xl bg-accent/10 px-3 py-2 text-xs leading-5 text-muted-foreground">
+          {bank.note}
+        </p>
+      )}
+    </motion.article>
+  );
+}
+
+function SectionHeader({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow: string;
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div className="mb-5 flex flex-col gap-1">
+      <p className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+        {eyebrow}
+      </p>
+
+      <h3 className="text-2xl font-black text-primary">{title}</h3>
+
+      {description && (
+        <p className="text-sm text-muted-foreground">{description}</p>
+      )}
+    </div>
   );
 }
 
 export function BankDetails() {
   return (
-    <motion.div
+    <motion.section
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="max-w-3xl mx-auto space-y-10"
+      className="mx-auto max-w-5xl space-y-10"
     >
-      {/* Instructions */}
-      <div className="bg-accent/10 border border-accent/20 rounded-lg p-4 flex items-start gap-3">
-        <span className="text-xl mt-0.5">📌</span>
-        <p className="text-sm text-muted-foreground">
-          After making a bank deposit, please notify us via{' '}
-          <span className="text-foreground font-medium">SMS, Email, Viber, or WhatsApp</span> and retain
-          the deposit slip as proof of payment.
+      <div className="rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/10 via-card to-primary/5 p-6 shadow-sm">
+        <p className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+          Payment information
+        </p>
+
+        <h2 className="mt-2 text-3xl font-black tracking-tight text-primary">
+          Bank Account Details
+        </h2>
+
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
+          These bank details are shown for demo purposes only. Real account
+          numbers are hidden with XXXXX.
         </p>
       </div>
 
-      {/* Local Banks */}
-      <div>
-        <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-          <span>🏦</span> Local Bank Accounts
-        </h3>
-        <div className="grid gap-4">
+      <section>
+        <SectionHeader
+          eyebrow="Sri Lanka"
+          title="Local Bank Accounts"
+          description="Demo Sri Lankan bank account details for WSK BUSINESS SERVICES."
+        />
+
+        <div className="grid gap-4 md:grid-cols-2">
           {localBanks.map((bank, index) => (
-            <motion.div
-              key={bank.name}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="bg-card border border-border rounded-lg p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-            >
-              <div className="space-y-1">
-                <h4 className="font-bold text-primary">{bank.name}</h4>
-                <p className="text-sm text-muted-foreground">
-                  Branch: {bank.branch} &nbsp;·&nbsp; {bank.accountType} Account
-                </p>
-                <p className="text-sm text-foreground font-mono">Acc No: {bank.accountNo}</p>
-              </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <CopyButton text={bank.accountNo} />
-              </div>
-            </motion.div>
+            <CommonBankCard key={bank.name} bank={bank} index={index} />
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Foreign Currency */}
-      <div>
-        <h3 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
-          <span>🌐</span> Foreign Currency Payments
-        </h3>
+      <section>
+        <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeader
+            eyebrow="International"
+            title="Foreign Currency Payments"
+            description="Demo international payment details only."
+          />
 
-        {/* Accepted currencies */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {currencies.map((c) => (
-            <span
-              key={c}
-              className="bg-accent/10 border border-accent/20 text-accent text-sm font-semibold px-3 py-1 rounded-full"
-            >
-              {c}
-            </span>
-          ))}
+          <div className="flex flex-wrap gap-2">
+            {currencies.map((currency) => (
+              <span
+                key={currency}
+                className="rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-sm font-bold text-accent"
+              >
+                {currency}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="grid gap-4">
+        <div className="grid gap-4 md:grid-cols-2">
           {foreignBanks.map((bank, index) => (
-            <motion.div
+            <CommonBankCard
               key={bank.name}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="bg-card border border-border rounded-lg p-5 space-y-3"
-            >
-              <h4 className="font-bold text-primary">{bank.name}</h4>
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-muted-foreground">Account No</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-mono text-foreground">{bank.accountNo}</span>
-                    <CopyButton text={bank.accountNo} />
-                  </div>
-                </div>
-                {bank.swift && (
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-sm text-muted-foreground">SWIFT Code</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-mono text-foreground">{bank.swift}</span>
-                      <CopyButton text={bank.swift} />
-                    </div>
-                  </div>
-                )}
-                {bank.aba && (
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-sm text-muted-foreground">Fedwire ABA</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-mono text-foreground">{bank.aba}</span>
-                      <CopyButton text={bank.aba} />
-                    </div>
-                  </div>
-                )}
-              </div>
-              {bank.note && (
-                <p className="text-xs text-muted-foreground border-t border-border pt-3">{bank.note}</p>
-              )}
-            </motion.div>
+              bank={bank}
+              index={index}
+              variant="foreign"
+            />
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Contact after payment */}
-      <div className="bg-gradient-to-r from-accent/10 to-primary/10 border border-accent/20 rounded-lg p-6 text-center">
-        <p className="text-foreground font-medium mb-1">Need help or made a payment?</p>
-        <p className="text-sm text-muted-foreground">
-          Contact us at{' '}
-          <a href="mailto:info@ebusinesseye.com" className="text-accent hover:underline">
-            info@ebusinesseye.com
-          </a>{' '}
-          or call{' '}
-          <a href="tel:0112889845" className="text-accent hover:underline">
-            0112 889 845
-          </a>
+      <div className="rounded-2xl border border-accent/20 bg-card p-6 text-center shadow-sm">
+        <p className="text-lg font-black text-primary">
+          Need help or made a payment?
+        </p>
+
+        <p className="mt-2 text-sm text-muted-foreground">
+          Contact WSK BUSINESS SERVICES for payment confirmation.
         </p>
       </div>
-    </motion.div>
+    </motion.section>
   );
 }
