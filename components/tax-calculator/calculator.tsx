@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 
 const numberFormatter = new Intl.NumberFormat('en-LK');
@@ -12,6 +12,7 @@ const moneyFormatter = new Intl.NumberFormat('en-LK', {
 
 const formatNumber = (value: number) => numberFormatter.format(value);
 const formatMoney = (value: number) => `Rs. ${moneyFormatter.format(value)}`;
+const DEFAULT_MONTHLY_INCOME = '0';
 
 type SlabRow = {
   label: string;
@@ -28,7 +29,7 @@ const parseIncome = (input: string) => {
 };
 
 export function Calculator() {
-  const [incomeInput, setIncomeInput] = useState('8000000');
+  const [incomeInput, setIncomeInput] = useState(DEFAULT_MONTHLY_INCOME);
 
   const monthlyIncome = useMemo(() => parseIncome(incomeInput), [incomeInput]);
 
@@ -94,7 +95,7 @@ export function Calculator() {
   };
 
   const handleReset = () => {
-    setIncomeInput('');
+    setIncomeInput(DEFAULT_MONTHLY_INCOME);
   };
 
   const visibleRows = useMemo(() => {
@@ -113,7 +114,15 @@ export function Calculator() {
           transition={{ duration: 0.6 }}
         >
           <Card className="p-4 md:p-5 border-border/80 shadow-md gap-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary text-center">Local Tax Calculator</h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45 }}
+              className="text-3xl md:text-4xl font-bold text-primary text-center"
+            >
+              Local Tax Calculator
+            </motion.h2>
 
             <div className="space-y-2">
               <label className="text-sm font-semibold text-foreground">Monthly Income (LKR)</label>
@@ -128,7 +137,13 @@ export function Calculator() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div className="rounded-lg border border-border bg-muted/20 p-3 space-y-2">
+              <motion.div
+                key={`monthly-${monthlyIncome}-${monthlyTax}`}
+                initial={{ opacity: 0, scale: 0.98, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="rounded-lg border border-border bg-muted/20 p-3 space-y-2"
+              >
                 <div>
                   <p className="text-sm text-muted-foreground">Monthly Income (LKR)</p>
                   <p className="text-3xl font-bold text-primary">{formatMoney(monthlyIncome)}</p>
@@ -137,8 +152,14 @@ export function Calculator() {
                   <p className="text-sm text-muted-foreground">Monthly Tax (LKR)</p>
                   <p className="text-2xl font-bold text-primary">{formatMoney(monthlyTax)}</p>
                 </div>
-              </div>
-              <div className="rounded-lg border border-border bg-muted/20 p-3 space-y-2">
+              </motion.div>
+              <motion.div
+                key={`annual-${annualIncome}-${annualTax}`}
+                initial={{ opacity: 0, scale: 0.98, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.35, ease: 'easeOut', delay: 0.04 }}
+                className="rounded-lg border border-border bg-muted/20 p-3 space-y-2"
+              >
                 <div>
                   <p className="text-sm text-muted-foreground">Annual Income (LKR)</p>
                   <p className="text-3xl font-bold text-primary">{formatMoney(annualIncome)}</p>
@@ -147,7 +168,7 @@ export function Calculator() {
                   <p className="text-sm text-muted-foreground">Annual Tax (LKR)</p>
                   <p className="text-2xl font-bold text-primary">{formatMoney(annualTax)}</p>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             <div className="rounded-lg border border-border overflow-hidden">
@@ -157,18 +178,25 @@ export function Calculator() {
                 <div className="p-3 text-sm font-semibold text-foreground text-right">Tax</div>
               </div>
 
-              {visibleRows.map((row, index) => (
-                <div
-                  key={`${row.label}-${index}`}
-                  className="grid grid-cols-[1.6fr_0.8fr_0.8fr] border-b last:border-b-0 border-border"
-                >
-                  <div className="p-3 text-sm text-foreground">{row.label}</div>
-                  <div className="p-3 text-sm text-foreground">{row.rateLabel}</div>
-                  <div className="p-3 text-sm text-foreground text-right">
-                    {row.showTax ? formatMoney(row.tax) : '-'}
-                  </div>
-                </div>
-              ))}
+              <AnimatePresence initial={false} mode="popLayout">
+                {visibleRows.map((row, index) => (
+                  <motion.div
+                    key={`${row.label}-${row.taxable}-${index}`}
+                    layout
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                    className="grid grid-cols-[1.6fr_0.8fr_0.8fr] border-b last:border-b-0 border-border"
+                  >
+                    <div className="p-3 text-sm text-foreground">{row.label}</div>
+                    <div className="p-3 text-sm text-foreground">{row.rateLabel}</div>
+                    <div className="p-3 text-sm text-foreground text-right">
+                      {row.showTax ? formatMoney(row.tax) : '-'}
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
 
               <div className="grid grid-cols-[1.6fr_0.8fr_0.8fr] bg-muted/20 border-t border-border">
                 <div className="p-3 text-sm font-bold text-foreground">Monthly Total</div>
@@ -178,13 +206,15 @@ export function Calculator() {
             </div>
 
             <div className="flex justify-center pt-1">
-              <button
+              <motion.button
                 type="button"
                 onClick={handleReset}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 className="rounded-md border border-orange-400 px-6 py-2 text-sm font-medium text-orange-600 hover:bg-orange-50 transition-colors"
               >
                 Reset Calculator
-              </button>
+              </motion.button>
             </div>
           </Card>
         </motion.div>
