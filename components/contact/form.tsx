@@ -16,6 +16,7 @@ export function ContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const services = [
     { value: 'tax-planning', label: 'Tax Planning & Optimization' },
@@ -38,13 +39,29 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError('');
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setIsSubmitting(false);
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(data.error || 'Failed to send message. Please try again.');
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to send message. Please try again.';
+      setSubmitError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
 
     // Reset after 3 seconds
     setTimeout(() => {
@@ -221,9 +238,13 @@ export function ContactForm() {
               )}
             </button>
 
+            {submitError ? (
+              <p className="text-sm text-destructive text-center">{submitError}</p>
+            ) : null}
+
             {/* Disclaimer */}
             <p className="text-xs text-muted-foreground text-center">
-              We respect your privacy. Your information will only be used to respond to your inquiry.
+              Your message is sent securely to our support inbox. We only use your details to respond.
             </p>
           </motion.form>
         )}

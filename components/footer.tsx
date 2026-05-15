@@ -1,11 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail, MapPin } from 'lucide-react';
 import { Newsletter } from './newsletter';
+import { cn } from '@/lib/utils';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
 
   const footerLinks = {
     Services: [
@@ -37,11 +41,15 @@ export function Footer() {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 font-bold text-2xl mb-4">
-              <div className="w-10 h-10 bg-accent rounded-md flex items-center justify-center text-primary text-xs font-bold">
-                WSK
-              </div>
-              WSK
+            <Link href="/" className="mb-4 flex items-center gap-3 text-2xl font-bold">
+              <Image
+                src="/wsklogo.png"
+                alt="WSK logo"
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-md bg-white/10 object-contain"
+              />
+              <span>WSK</span>
             </Link>
             <p className="text-primary-foreground/70 text-sm mb-6">
               Premier financial solutions for businesses of all sizes.
@@ -74,7 +82,12 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+                      className={cn(
+                        'transition-colors text-sm',
+                        pathname === link.href
+                          ? 'text-accent font-semibold'
+                          : 'text-primary-foreground/70 hover:text-primary-foreground'
+                      )}
                     >
                       {link.label}
                     </Link>

@@ -2,12 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Menu, X, ArrowRight, CreditCard } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,10 +42,14 @@ export function Navigation() {
       >
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4A017] text-sm font-bold text-white shadow-md">
-            WSK
-          </div>
-
+          <Image
+            src="/wsklogo.png"
+            alt="WSK logo"
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-xl object-contain"
+            priority
+          />
           <h2 className="text-xl font-bold text-[#0B1F3A]">WSK</h2>
         </Link>
 
@@ -51,7 +59,12 @@ export function Navigation() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-[#0B1F3A] hover:text-[#D4A017] transition"
+              className={cn(
+                'text-sm font-medium transition pb-1 border-b-2',
+                pathname === link.href
+                  ? 'text-[#D4A017] border-[#D4A017]'
+                  : 'text-[#0B1F3A] border-transparent hover:text-[#D4A017]'
+              )}
             >
               {link.name}
             </Link>
@@ -105,7 +118,12 @@ export function Navigation() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="border-b border-slate-100 py-4 text-base font-medium text-[#0B1F3A] hover:text-[#D4A017]"
+                  className={cn(
+                    'border-b py-4 text-base font-medium',
+                    pathname === link.href
+                      ? 'border-[#D4A017] text-[#D4A017] underline underline-offset-4'
+                      : 'border-slate-100 text-[#0B1F3A] hover:text-[#D4A017]'
+                  )}
                 >
                   {link.name}
                 </Link>
