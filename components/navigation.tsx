@@ -31,6 +31,9 @@ export function Navigation() {
     { name: 'Blog', href: '/blog' },
   ];
 
+  const isActiveLink = (href: string) =>
+    pathname === href || (href !== '/' && pathname.startsWith(`${href}/`));
+
   return (
     <header className="fixed top-0 left-0 z-50 w-full px-4 pt-5">
       <nav
@@ -61,7 +64,7 @@ export function Navigation() {
               href={link.href}
               className={cn(
                 'text-sm font-medium transition pb-1 border-b-2',
-                pathname === link.href
+                isActiveLink(link.href)
                   ? 'text-[#D4A017] border-[#D4A017]'
                   : 'text-[#0B1F3A] border-transparent hover:text-[#D4A017]'
               )}
@@ -120,7 +123,7 @@ export function Navigation() {
                   onClick={() => setIsOpen(false)}
                   className={cn(
                     'border-b py-4 text-base font-medium',
-                    pathname === link.href
+                    isActiveLink(link.href)
                       ? 'border-[#D4A017] text-[#D4A017] underline underline-offset-4'
                       : 'border-slate-100 text-[#0B1F3A] hover:text-[#D4A017]'
                   )}

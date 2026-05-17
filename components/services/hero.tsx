@@ -1,31 +1,92 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowRight, CheckCircle2, ChevronRight, FileText, LineChart, ShieldCheck } from 'lucide-react';
 
 export function ServicesHero() {
   return (
-    <section className="min-h-[60vh] pt-24 pb-16 bg-gradient-to-b from-background to-card/20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-[#F5F7FA] px-4 pb-16 pt-32 sm:px-6 lg:px-8 lg:pb-24 lg:pt-36">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center space-y-6"
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl"
         >
-          <div className="inline-block">
-            <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2">
-              <span className="text-2xl">⚙️</span>
-              <span className="text-sm font-medium text-foreground">Comprehensive Solutions</span>
-            </div>
+          <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm font-semibold text-[#5B6472]">
+            <Link href="/" className="transition-colors hover:text-[#D4A017]">
+              Home
+            </Link>
+            <ChevronRight className="h-4 w-4 text-[#D4A017]" aria-hidden="true" />
+            <span className="text-[#0B1F3A]">Our Services</span>
+          </nav>
+
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#D4A017]/25 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#D4A017] shadow-sm">
+            Accounting and Business Advisory
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-primary leading-tight">
-            Services Tailored for Success
+          <h1 className="text-5xl font-bold leading-tight text-[#0B1F3A] md:text-6xl lg:text-7xl">
+            Our Services
           </h1>
 
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            From tax optimization to strategic business consulting, we offer comprehensive financial services designed to maximize your growth and profitability.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5B6472]">
+            Trusted accounting, taxation, payroll, and business consultancy services designed to help organisations make confident decisions and operate with clarity.
           </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/contact"
+              className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#D4A017] px-6 py-3 font-semibold text-[#0B1F3A] transition-all duration-300 hover:bg-[#c89512]"
+            >
+              Contact Us
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1">
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
+            <a
+              href="#services-overview"
+              className="inline-flex items-center justify-center rounded-full border border-[#E5EAF0] bg-white px-6 py-3 font-semibold text-[#0B1F3A] shadow-sm transition-all hover:border-[#D4A017]/50 hover:text-[#D4A017]"
+            >
+              Explore Services
+            </a>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="relative"
+          aria-label="Service highlights"
+        >
+          <div className="rounded-[32px] border border-white bg-white p-5 shadow-xl shadow-slate-200/70">
+            <div className="rounded-[24px] bg-[#0B1F3A] p-6 text-white">
+              <div className="flex items-start justify-between gap-6">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#D4A017]">WSK Services</p>
+                  <h2 className="mt-4 text-3xl font-bold leading-tight">Business support built around your goals.</h2>
+                </div>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#D4A017] text-[#0B1F3A]">
+                  <ShieldCheck className="h-6 w-6" />
+                </div>
+              </div>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {[
+                  { icon: LineChart, label: 'Strategic consulting' },
+                  { icon: FileText, label: 'Corporate development' },
+                  { icon: CheckCircle2, label: 'Accounting and payroll' },
+                  { icon: ShieldCheck, label: 'Taxation support' },
+                ].map((item) => (
+                  <div key={item.label} className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                    <item.icon className="mb-4 h-6 w-6 text-[#D4A017]" />
+                    <p className="text-sm font-semibold leading-6 text-white/90">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
