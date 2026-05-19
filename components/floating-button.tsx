@@ -8,15 +8,17 @@ export function FloatingButton() {
       href="https://wa.me/94707590990"
       target="_blank"
       rel="noopener noreferrer"
+      animate={{ scale: [1, 1.08, 1] }}
+      transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-8 right-8 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center z-40 group"
+      className="fixed bottom-8 right-8 w-14 h-14 bg-[#25D366] text-white rounded-full border border-white/80 shadow-[0_0_28px_rgba(37,211,102,0.68)] ring-2 ring-[#9CFFBF]/70 hover:shadow-[0_0_34px_rgba(37,211,102,0.85)] transition-shadow flex items-center justify-center z-[70] group"
     >
       <motion.div
         animate={{ rotate: [0, 15, -15, 0] }}
         transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-        className="absolute w-16 h-16 bg-[#25D366]/25 rounded-full"
+        className="absolute w-16 h-16 bg-[#25D366]/38 rounded-full"
       ></motion.div>
       <svg
         viewBox="0 0 32 32"

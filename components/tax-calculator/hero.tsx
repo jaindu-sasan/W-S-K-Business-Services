@@ -7,7 +7,7 @@ export function TaxCalculatorHero() {
     <section className="relative min-h-[95vh] pt-24 pb-16 overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/123.png')" }}
+        style={{ backgroundImage: "url('/TaxcalHe.png')" }}
       />
       <div className="absolute inset-0 bg-background/55" />
 
@@ -32,6 +32,7 @@ export function TaxCalculatorHero() {
             Calculate monthly tax deductions from regular profits from primary employment, and identify when
             Table No. 02, 03, or 05 should be used.
           </p>
+
         </motion.div>
       </div>
     </section>

@@ -32,8 +32,14 @@ export function ContactHero() {
   ];
 
   return (
-    <section className="min-h-screen pt-24 pb-20 bg-gradient-to-b from-background to-card/20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen pt-24 pb-20 overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/123.png')" }}
+      />
+      <div className="absolute inset-0 bg-background/70" />
+
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
