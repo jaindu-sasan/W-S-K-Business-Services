@@ -3,7 +3,15 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, FileText, LineChart, ShieldCheck } from 'lucide-react';
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  Building2,
+  CheckCircle2,
+  FileText,
+  LineChart,
+  ShieldCheck,
+} from 'lucide-react';
 
 const highlightItems = [
   { icon: LineChart, label: 'Strategic consulting' },
@@ -45,33 +53,79 @@ export function ServicesHero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="mx-auto max-w-4xl text-center md:absolute md:inset-0 md:flex md:flex-col md:justify-center"
+              className="mx-auto w-full max-w-6xl md:absolute md:inset-0 md:flex md:items-center"
             >
-              <h1 className="text-5xl font-bold leading-tight text-[#0B1F3A] md:text-6xl lg:text-7xl">
-                Our Services
-              </h1>
+              <div className="grid w-full items-start gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+                <div className="text-center lg:text-left">
+                  <h1 className="text-5xl font-bold leading-tight text-[#0B1F3A] md:text-6xl lg:text-7xl">
+                    Our Services
+                  </h1>
 
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#5B6472]">
-                Trusted accounting, taxation, payroll, and business consultancy services designed to help
-                organisations make confident decisions and operate with clarity.
-              </p>
+                  <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#5B6472] lg:mx-0">
+                    Trusted accounting, taxation, payroll, and business consultancy services designed to help
+                    organisations make confident decisions and operate with clarity.
+                  </p>
 
-              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#D4A017] px-6 py-3 font-semibold text-[#0B1F3A] transition-all duration-300 hover:bg-[#c89512]"
-                >
-                  Contact Us
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1">
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </Link>
-                <a
-                  href="#services-overview"
-                  className="inline-flex items-center justify-center rounded-full border border-[#E5EAF0] bg-white px-6 py-3 font-semibold text-[#0B1F3A] shadow-sm transition-all hover:border-[#D4A017]/50 hover:text-[#D4A017]"
-                >
-                  Explore Services
-                </a>
+                  <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+                    <Link
+                      href="/contact"
+                      className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#D4A017] px-6 py-3 font-semibold text-[#0B1F3A] transition-all duration-300 hover:bg-[#c89512]"
+                    >
+                      Contact Us
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1">
+                        <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </Link>
+                    <a
+                      href="#services-overview"
+                      className="inline-flex items-center justify-center rounded-full border border-[#E5EAF0] bg-white px-6 py-3 font-semibold text-[#0B1F3A] shadow-sm transition-all hover:border-[#D4A017]/50 hover:text-[#D4A017]"
+                    >
+                      Explore Services
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-2 ml-auto max-w-lg space-y-3 lg:mt-6">
+                  <div
+                    className="relative min-h-[160px] overflow-hidden rounded-xl border border-white/20 p-4 shadow-sm"
+                    style={{
+                      backgroundImage: "url('/MCS.png')",
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-[#0B1F3A]/60" />
+                    <div className="relative z-10">
+                      <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#D4A017] text-[#0B1F3A]">
+                        <BriefcaseBusiness className="h-5 w-5" />
+                      </div>
+                      <h3 className="text-xl font-bold leading-tight text-white md:text-2xl">
+                        Management Consultancy Services
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div
+                    className="relative min-h-[160px] overflow-hidden rounded-xl border border-white/20 p-4 shadow-sm"
+                    style={{
+                      backgroundImage: "url('/CDS.png')",
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-[#0B1F3A]/60" />
+                    <div className="relative z-10">
+                      <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#D4A017] text-[#0B1F3A]">
+                        <Building2 className="h-5 w-5" />
+                      </div>
+                      <h3 className="text-xl font-bold leading-tight text-white md:text-2xl">
+                        Corporate Development Services
+                      </h3>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ) : (
