@@ -10,9 +10,7 @@ type PaymentHeroProps = {
 
 const trustBadges = [
   { icon: ShieldCheck, label: '256-bit SSL' },
-  { icon: Zap, label: 'Instant Confirmation' },
-  { icon: Landmark, label: '9 Local Banks' },
-  { icon: Globe, label: 'Foreign Currency' },
+  { icon: Zap, label: 'Instant Confirmation' }
 ];
 
 export function PaymentHero({ action }: PaymentHeroProps) {
