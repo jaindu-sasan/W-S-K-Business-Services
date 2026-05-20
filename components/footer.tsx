@@ -40,7 +40,7 @@ export function Footer() {
       <footer className="bg-primary text-primary-foreground">
       <div className="max-w-[1800px] mx-auto px-4 sm:px-4 lg:px-4">
         {/* Main Footer Content */}
-        <div className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="mb-3 flex items-center gap-3 text-2xl font-bold">
