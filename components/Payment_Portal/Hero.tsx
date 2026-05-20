@@ -34,16 +34,6 @@ export function PaymentHero({ action }: PaymentHeroProps) {
         className="absolute right-10 top-24 hidden h-20 w-20 rounded-full border border-accent/20 bg-accent/5 md:block"
       />
 
-      <motion.div
-        animate={{ y: [0, 12, 0], x: [0, -8, 0] }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute bottom-10 left-10 hidden h-16 w-16 rounded-2xl border border-primary/10 bg-primary/5 md:block"
-      />
-
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 18 }}

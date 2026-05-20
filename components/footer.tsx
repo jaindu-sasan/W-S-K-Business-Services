@@ -20,8 +20,10 @@ export function Footer() {
     ],
     Company: [
       { label: 'About Us', href: '/about' },
+      /*
       { label: 'Blog', href: '/blog' },
       { label: 'Projects', href: '/projects' },
+       */
       { label: 'Contact', href: '/contact' },
     ],
     Legal: [

@@ -36,7 +36,7 @@ export function CTA() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <a
-              href="tel:+1234567890"
+              href="tel:+94115044433"
               className="bg-primary-foreground/20 text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary-foreground/30 transition-all inline-flex items-center justify-center gap-2 border border-primary-foreground/30"
             >
               <Phone className="w-5 h-5" />
@@ -54,14 +54,14 @@ export function CTA() {
           >
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5" />
-              <a href="tel:+1234567890" className="hover:underline">
-                (123) 456-7890
+              <a href="tel:+94115044433" className="hover:underline">
+                011 5044 433
               </a>
             </div>
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5" />
-              <a href="mailto:info@wskbusiness.com" className="hover:underline">
-                info@wskbusiness.com
+              <a href="mailto:admin@wskbiz.com" className="hover:underline">
+                admin@wskbiz.com
               </a>
             </div>
           </motion.div>

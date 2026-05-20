@@ -27,8 +27,9 @@ export function Navigation() {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Tax Calculator', href: '/tax-calculator' },
+    /*
     { name: 'Projects', href: '/projects' },
-    { name: 'Blog', href: '/blog' },
+    { name: 'Blog', href: '/blog' },*/
   ];
 
   const isActiveLink = (href: string) =>
@@ -37,7 +38,7 @@ export function Navigation() {
   return (
     <header className="fixed top-0 left-0 z-50 w-full px-4 pt-5">
       <nav
-        className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-6 py-2 transition-all duration-300 lg:px-8 ${
+        className={`mx-auto flex max-w-[1800px] items-center justify-between rounded-full border px-8 py-3 transition-all duration-300 lg:px-10 ${
           isScrolled
             ? 'border-white/20 bg-white/90 shadow-xl backdrop-blur-xl'
             : 'border-white/40 bg-white/80 backdrop-blur-md'
@@ -48,22 +49,22 @@ export function Navigation() {
           <Image
             src="/wsklogo.png"
             alt="WSK logo"
-            width={44}
-            height={44}
-            className="h-11 w-11 rounded-xl object-contain"
+            width={52}
+            height={52}
+            className="h-[52px] w-[52px] rounded-xl object-contain"
             priority
           />
-          <h2 className="text-xl font-bold text-[#0B1F3A]">WSK</h2>
+          <h2 className="text-3xl font-bold text-[#0B1F3A]">WSK</h2>
         </Link>
 
         {/* DESKTOP MENU */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
               className={cn(
-                'text-sm font-medium transition pb-1 border-b-2',
+                'text-base font-medium transition pb-1 border-b-2',
                 isActiveLink(link.href)
                   ? 'text-[#D4A017] border-[#D4A017]'
                   : 'text-[#0B1F3A] border-transparent hover:text-[#D4A017]'
@@ -76,9 +77,9 @@ export function Navigation() {
           {/* PAYMENT BUTTON (kept feature) */}
           <Link
             href="/Payment_portal"
-            className="flex items-center gap-2 border border-[#D4A017] text-[#D4A017] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#D4A017]/10 transition"
+            className="flex items-center gap-2 border border-[#D4A017] text-[#D4A017] px-6 py-2.5 rounded-lg font-semibold text-base hover:bg-[#D4A017]/10 transition"
           >
-            <CreditCard className="w-4 h-4" />
+            <CreditCard className="w-5 h-5" />
             Pay Online
           </Link>
         </div>
@@ -87,11 +88,11 @@ export function Navigation() {
         <div className="hidden lg:block">
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-3 rounded-full bg-[#D4A017] px-2 py-1 font-semibold text-[#0B1F3A] transition-all duration-300 hover:scale-105 hover:bg-[#c89512]"
+            className="group inline-flex items-center gap-3 rounded-full bg-[#D4A017] px-3 py-1.5 text-base font-semibold text-[#0B1F3A] transition-all duration-300 hover:scale-105 hover:bg-[#c89512]"
           >
             Contact Us
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1">
-              <ArrowRight size={16} />
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1">
+              <ArrowRight size={18} />
             </span>
           </Link>
         </div>
@@ -113,7 +114,7 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25 }}
-            className="mx-auto mt-4 max-w-7xl overflow-hidden rounded-3xl border border-white/20 bg-white/95 shadow-2xl backdrop-blur-xl lg:hidden"
+            className="mx-auto mt-4 max-w-[1800px] overflow-hidden rounded-3xl border border-white/20 bg-white/95 shadow-2xl backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col p-6">
               {navLinks.map((link) => (
