@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import CountUp from 'react-countup';
+import Link from 'next/link';
 
 export function Hero() {
   const containerVariants = {
@@ -78,25 +79,27 @@ export function Hero() {
           </motion.p>
 
           {/* Button */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <button className="group inline-flex items-center gap-3 rounded-full bg-[#0B1F3A] px-8 py-4 text-white transition-all duration-300 hover:bg-[#10284A]">
-              Discover More
+       <motion.div
+  variants={itemVariants}
+  className="mt-10 flex flex-wrap gap-4"
+>
+  <Link
+    href="/services"
+    className="group inline-flex items-center gap-3 rounded-full bg-[#0B1F3A] px-8 py-4 text-white transition-all duration-300 hover:bg-[#10284A]"
+  >
+    Discover More
 
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#0B1F3A] transition-transform duration-300 group-hover:translate-x-1">
-                <ArrowRight size={16} />
-              </span>
-            </button>
-          </motion.div>
+    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#0B1F3A] transition-transform duration-300 group-hover:translate-x-1">
+      <ArrowRight size={16} />
+    </span>
+  </Link>
+</motion.div>
         </motion.div>
 
         {/* RIGHT SIDE */}
         <div className="relative flex items-center justify-center">
           
-          {/* Background Circle */}
-          <div className="absolute h-[650px] w-[650px] rounded-full bg-white" />
+         
 
           {/* Trusted Card */}
           <motion.div

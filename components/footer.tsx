@@ -133,7 +133,7 @@ export function Footer() {
               <MapPin className="w-5 h-5 text-accent" />
               <div>
                 <p className="text-base text-primary-foreground/70">Address</p>
-                <p className="text-lg font-semibold">123 Business St, Suite 100</p>
+                <p className="text-lg font-semibold">329/1, Nawala Road, Nawala</p>
               </div>
             </div>
           </div>
