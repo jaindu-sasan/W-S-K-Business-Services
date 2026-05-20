@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail, MapPin } from 'lucide-react';
-import { Newsletter } from './newsletter';
 import { cn } from '@/lib/utils';
 
 export function Footer() {
@@ -38,9 +37,9 @@ export function Footer() {
     <>
       
       <footer className="bg-primary text-primary-foreground">
-      <div className="max-w-[1800px] mx-auto px-4 sm:px-4 lg:px-4">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         {/* Main Footer Content */}
-        <div className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="mb-3 flex items-center gap-3 text-2xl font-bold">
@@ -101,8 +100,8 @@ export function Footer() {
         </div>
 
         {/* Contact Section */}
-        <div className="border-t border-primary-foreground/10 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="border-t border-primary-foreground/10 py-10">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-accent" />
               <div>
@@ -132,7 +131,7 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-primary-foreground/10 py-5 flex flex-col md:flex-row justify-between items-center gap-3">
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-primary-foreground/10 py-6 md:flex-row">
           <p className="text-primary-foreground/70 text-sm">
             &copy; {currentYear} WSK Business Services. All rights reserved.
           </p>
