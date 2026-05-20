@@ -27,15 +27,16 @@ export function ServicesHero() {
     <section
       className="relative overflow-hidden px-4 pb-8 pt-16 sm:px-6 lg:px-8 lg:pb-10 lg:pt-20"
       style={{
-        backgroundImage:
-          "linear-gradient(rgba(245, 247, 250, 0.5), rgba(245, 247, 250, 0.5)), url('/servise%20Header.png')",
+        backgroundImage: "url('/servise%20Header.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="mx-auto max-w-7xl">
-        <div className="relative md:min-h-[400px]">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F5F7FA]/70 via-[#F5F7FA]/60 to-[#F5F7FA]/70" />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="relative md:min-h-[440px]">
           <AnimatePresence mode="wait" initial={false}>
           {activeSlide === 0 ? (
             <motion.div

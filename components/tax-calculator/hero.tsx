@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export function TaxCalculatorHero() {
   return (
-    <section className="relative min-h-[72vh] pt-20 pb-10 overflow-hidden">
+    <section className="relative min-h-[78vh] pt-20 pb-10 overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/TaxcalHe.png')" }}
