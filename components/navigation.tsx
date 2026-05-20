@@ -27,8 +27,9 @@ export function Navigation() {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Tax Calculator', href: '/tax-calculator' },
+    /*
     { name: 'Projects', href: '/projects' },
-    { name: 'Blog', href: '/blog' },
+    { name: 'Blog', href: '/blog' },*/
   ];
 
   const isActiveLink = (href: string) =>
@@ -53,7 +54,7 @@ export function Navigation() {
             className="h-11 w-11 rounded-xl object-contain"
             priority
           />
-          <h2 className="text-xl font-bold text-[#0B1F3A]">WSK</h2>
+          <h2 className="text-2xl font-bold text-[#0B1F3A]">WSK</h2>
         </Link>
 
         {/* DESKTOP MENU */}
@@ -87,7 +88,7 @@ export function Navigation() {
         <div className="hidden lg:block">
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-3 rounded-full bg-[#D4A017] px-2 py-1 font-semibold text-[#0B1F3A] transition-all duration-300 hover:scale-105 hover:bg-[#c89512]"
+            className="group inline-flex items-center gap-3 rounded-full bg-[#D4A017] px-2 py-1 text-sm font-semibold text-[#0B1F3A] transition-all duration-300 hover:scale-105 hover:bg-[#c89512]"
           >
             Contact Us
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1">

@@ -168,12 +168,6 @@ export function Testimonials() {
           ))}
         </div>
 
-        {/* Bottom Dots */}
-        <div className="mt-14 flex justify-center gap-3">
-          <div className="h-3 w-3 rounded-full bg-[#0B1F3A]" />
-          <div className="h-3 w-3 rounded-full bg-[#D4A017]" />
-          <div className="h-3 w-3 rounded-full bg-slate-300" />
-        </div>
       </div>
     </section>
   );
