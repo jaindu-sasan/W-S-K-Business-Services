@@ -83,7 +83,7 @@ export function Services() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-[28px] font-bold leading-snug text-[#0B1F3A]">
+                <h3 className="text-[20px] font-bold leading-snug text-[#0B1F3A]">
                   {service.title}
                 </h3>
 

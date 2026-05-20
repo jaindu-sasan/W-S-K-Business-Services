@@ -8,6 +8,7 @@ import { CTA } from '@/components/home/cta';
 import { Footer } from '@/components/footer';
 import { AboutUs } from '@/components/home/aboutUs';
 import { Testimonials } from '@/components/home/testimonials';
+import {TaxSection} from '@/components/home/taxSection'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <Services />
+      <TaxSection/>
       <AboutUs/>
       <Stats />
       <Testimonials/>

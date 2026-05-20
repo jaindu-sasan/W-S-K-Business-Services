@@ -54,7 +54,7 @@ export function AboutUs() {
             </p>
 
             {/* Heading */}
-            <h2 className="text-4xl font-bold leading-tight text-[#0B1F3A] md:text-6xl">
+            <h2 className="text-4xl font-bold leading-tight text-[#0B1F3A] md:text-5xl">
               Building Financial
               <span className="block text-[#D4A017]">
                 Confidence Together
