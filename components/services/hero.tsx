@@ -25,7 +25,7 @@ export function ServicesHero() {
 
   return (
     <section
-      className="relative overflow-hidden px-4 pb-10 pt-24 sm:px-6 lg:px-8 lg:pb-14 lg:pt-28"
+      className="relative overflow-hidden px-4 pb-8 pt-16 sm:px-6 lg:px-8 lg:pb-10 lg:pt-20"
       style={{
         backgroundImage:
           "linear-gradient(rgba(245, 247, 250, 0.5), rgba(245, 247, 250, 0.5)), url('/servise%20Header.png')",
@@ -35,7 +35,7 @@ export function ServicesHero() {
       }}
     >
       <div className="mx-auto max-w-7xl">
-        <div className="relative md:min-h-[470px]">
+        <div className="relative md:min-h-[400px]">
           <AnimatePresence mode="wait" initial={false}>
           {activeSlide === 0 ? (
             <motion.div

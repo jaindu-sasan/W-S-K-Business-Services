@@ -25,6 +25,7 @@ export function AboutUs() {
                 src="/images/about-us.png"
                 alt="WSK Business Team"
                 fill
+                loading="eager"
                 className="object-cover"
               />
             </div>

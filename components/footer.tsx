@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail, MapPin } from 'lucide-react';
+import { Facebook, Linkedin, Phone, Mail, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function Footer() {
@@ -57,14 +57,14 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: Facebook, href: '#' },
-                { icon: Twitter, href: '#' },
-                { icon: Linkedin, href: '#' },
-                { icon: Instagram, href: '#' },
+                { icon: Facebook, href: 'https://www.facebook.com/p/W-S-K-Business-Services-100063708244058/' },
+                { icon: Linkedin, href: 'https://lk.linkedin.com/company/w-s-k-business-services-pvt-ltd' },
               ].map((social, i) => (
                 <a
                   key={i}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-primary-foreground/10 hover:bg-primary-foreground/20 rounded-lg p-2 transition-colors"
                   aria-label="Social link"
                 >
@@ -81,17 +81,26 @@ export function Footer() {
               <ul className="space-y-1.5">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        'text-base transition-colors',
-                        pathname === link.href
-                          ? 'text-accent font-semibold'
-                          : 'text-primary-foreground/70 hover:text-primary-foreground'
-                      )}
-                    >
-                      {link.label}
-                    </Link>
+                    {link.href.startsWith('#') ? (
+                      <a
+                        href={link.href}
+                        className="text-base text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          'text-base transition-colors',
+                          pathname === link.href
+                            ? 'text-accent font-semibold'
+                            : 'text-primary-foreground/70 hover:text-primary-foreground'
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -131,12 +140,13 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-primary-foreground/10 py-6 md:flex-row">
+        <div className="border-t border-primary-foreground/10 py-6 text-center">
           <p className="text-base text-primary-foreground/70">
-            &copy; {currentYear} WSK Business Services. All rights reserved.
+            &copy; {currentYear} WSK Business Services. All Rights Reserved.
           </p>
-          <p className="text-base text-primary-foreground/70">
-            Designed & built with care for your financial success.
+          <div className="mx-auto my-2 h-px w-40 bg-primary-foreground/25" />
+          <p className="mt-1 text-base text-primary-foreground/70">
+            Design and Development by Trust Code
           </p>
         </div>
       </div>

@@ -68,6 +68,8 @@ export function Services() {
                   src={service.image}
                   alt={service.title}
                   fill
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  priority={index === 0}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 

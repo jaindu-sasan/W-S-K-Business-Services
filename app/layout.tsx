@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} bg-background scroll-smooth`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${jakarta.variable} bg-background scroll-smooth`}>
       <body className="font-sans antialiased bg-background text-foreground">
         {children}
         <FloatingButton />
