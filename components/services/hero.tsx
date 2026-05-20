@@ -2,26 +2,27 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, ChevronRight, FileText, LineChart, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle2, FileText, LineChart, ShieldCheck } from 'lucide-react';
 
 export function ServicesHero() {
   return (
-    <section className="relative overflow-hidden bg-[#F5F7FA] px-4 pb-16 pt-32 sm:px-6 lg:px-8 lg:pb-24 lg:pt-36">
+    <section
+      className="relative overflow-hidden px-4 pb-16 pt-32 sm:px-6 lg:px-8 lg:pb-24 lg:pt-36"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(245, 247, 250, 0.5), rgba(245, 247, 250, 0.5)), url('/servise%20Header.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="max-w-3xl"
+          className="max-w-3xl lg:order-2"
         >
-          <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm font-semibold text-[#5B6472]">
-            <Link href="/" className="transition-colors hover:text-[#D4A017]">
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4 text-[#D4A017]" aria-hidden="true" />
-            <span className="text-[#0B1F3A]">Our Services</span>
-          </nav>
-
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#D4A017]/25 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#D4A017] shadow-sm">
             Accounting and Business Advisory
           </div>
@@ -57,7 +58,7 @@ export function ServicesHero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="relative"
+          className="relative lg:order-1"
           aria-label="Service highlights"
         >
           <div className="rounded-[32px] border border-white bg-white p-5 shadow-xl shadow-slate-200/70">
