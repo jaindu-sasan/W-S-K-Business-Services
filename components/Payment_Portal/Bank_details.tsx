@@ -14,7 +14,6 @@ type BankAccount = {
   holder?: string;
   swift?: string;
   aba?: string;
-  note?: string;
   tag?: string;
 };
 
@@ -159,12 +158,6 @@ function CommonBankCard({
         <InfoLine label="Fedwire ABA" value={bank.aba} />
         <InfoLine label="Account Holder" value={bank.holder} />
       </div>
-
-      {bank.note && (
-        <p className="mt-2 rounded-xl bg-accent/10 px-3 py-2 text-xs leading-5 text-muted-foreground">
-          {bank.note}
-        </p>
-      )}
     </motion.article>
   );
 }
@@ -209,18 +202,13 @@ export function BankDetails() {
         <h2 className="mt-2 text-3xl font-black tracking-tight text-primary">
           Bank Account Details
         </h2>
-
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
-          These bank details are shown for demo purposes only. Real account
-          numbers are hidden with XXXXX.
-        </p>
       </div>
 
       <section>
         <SectionHeader
           eyebrow="Sri Lanka"
           title="Local Bank Accounts"
-          description="Demo Sri Lankan bank account details for WSK BUSINESS SERVICES."
+          description="Sri Lankan bank account details for WSK BUSINESS SERVICES."
         />
 
         <div className="grid gap-4 md:grid-cols-2">

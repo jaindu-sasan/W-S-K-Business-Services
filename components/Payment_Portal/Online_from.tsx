@@ -1,310 +1,332 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import {
+  AlertCircle,
+  ArrowRight,
+  CheckCircle2,
+  CreditCard,
+  Loader2,
+  LockKeyhole,
+  Mail,
+  Phone,
+  ReceiptText,
+  ShieldCheck,
+  Sparkles,
+  User,
+  WalletCards,
+} from 'lucide-react';
 
 type FormData = {
   name: string;
-  reference: string;
   email: string;
   mobile: string;
   amount: string;
+  reference: string;
 };
 
-type Field = {
-  id: keyof FormData;
-  label: string;
-  type: 'input' | 'textarea';
-  inputType?: string;
-  placeholder: string;
-};
+type PayHereFieldMap = Record<string, string>;
 
-type InfoCard = {
-  title: string;
-  description: string;
+type CreatePaymentResponse = {
+  ok: boolean;
+  mode: 'approval_pending' | 'payhere_redirect';
+  message: string;
+  orderId?: string;
+  endpoint?: string;
+  fields?: PayHereFieldMap;
 };
 
 const COMPANY_NAME = 'WSK BUSINESS SERVICES';
-const IPAYOS_URL = 'https://ebusinesseye.ipayos.lk';
 
-const fields: Field[] = [
-  {
-    id: 'name',
-    label: "Payer's Name",
-    type: 'input',
-    inputType: 'text',
-    placeholder: 'Enter your full name',
-  },
-  {
-    id: 'reference',
-    label: 'Reference Details & Reason',
-    type: 'textarea',
-    placeholder: 'Enter payment reference and reason',
-  },
-  {
-    id: 'email',
-    label: 'Email Address',
-    type: 'input',
-    inputType: 'email',
-    placeholder: 'Enter your email address',
-  },
-  {
-    id: 'mobile',
-    label: 'Mobile Number',
-    type: 'input',
-    inputType: 'tel',
-    placeholder: 'Enter your mobile number',
-  },
-  {
-    id: 'amount',
-    label: 'Amount (Rs.)',
-    type: 'input',
-    inputType: 'number',
-    placeholder: '0.00',
-  },
-];
+const initialFormData: FormData = {
+  name: '',
+  email: '',
+  mobile: '',
+  amount: '',
+  reference: '',
+};
 
-const infoCards: InfoCard[] = [
-  {
-    title: 'Secure Payment',
-    description: 'Protected hosted checkout through the payment gateway.',
-  },
-  {
-    title: 'Demo Details',
-    description: 'No real account or card number is displayed on this page.',
-  },
-  {
-    title: 'Quick Process',
-    description: 'Fill the form and continue to complete the payment.',
-  },
-];
+const inputBase =
+  'w-full rounded-2xl border border-border/80 bg-background/80 px-4 py-3.5 text-sm text-foreground shadow-sm outline-none transition placeholder:text-muted-foreground/50 focus:border-accent focus:ring-4 focus:ring-accent/10';
 
-function CommonInputField({
-  field,
-  value,
-  onChange,
-}: {
-  field: Field;
-  value: string;
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-}) {
-  return (
-    <div className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
-      <label className="mb-1.5 block text-xs font-semibold text-primary">
-        {field.label}
-      </label>
+function submitPayHereForm(endpoint: string, fields: PayHereFieldMap) {
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = endpoint;
+  form.style.display = 'none';
 
-      {field.type === 'textarea' ? (
-        <textarea
-          name={field.id}
-          value={value}
-          onChange={onChange}
-          placeholder={field.placeholder}
-          rows={4}
-          className="w-full resize-none rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-accent focus:ring-4 focus:ring-accent/10"
-        />
-      ) : (
-        <input
-          name={field.id}
-          type={field.inputType}
-          value={value}
-          onChange={onChange}
-          placeholder={field.placeholder}
-          className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-accent focus:ring-4 focus:ring-accent/10"
-        />
-      )}
-    </div>
-  );
-}
-
-function CommonInfoCard({ item }: { item: InfoCard }) {
-  return (
-    <div className="rounded-xl border border-border bg-card p-4">
-      <p className="text-xs font-bold text-primary">{item.title}</p>
-      <p className="mt-1.5 text-xs leading-5 text-muted-foreground">
-        {item.description}
-      </p>
-    </div>
-  );
-}
-
-function DemoPaymentCard() {
-  return (
-    <div className="rounded-2xl border border-white/20 bg-white/10 p-5 shadow-xl backdrop-blur-xl">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70">
-            {COMPANY_NAME}
-          </p>
-
-          <p className="mt-2 text-xl font-bold text-white">
-            Demo Payment Card
-          </p>
-        </div>
-
-        <div className="rounded-full border border-white/20 px-3 py-1.5 text-[10px] font-semibold text-white/80">
-          Demo
-        </div>
-      </div>
-
-      <div className="mt-7 h-8 w-14 rounded-lg bg-white/70" />
-
-      <p className="mt-7 text-lg font-bold tracking-[0.18em] text-white">
-        XXXX XXXX XXXX XXXX
-      </p>
-
-      <div className="mt-7 flex items-end justify-between gap-4">
-        <div>
-          <p className="text-[10px] text-white/60">Payment For</p>
-          <p className="mt-1 text-xs font-semibold text-white">
-            {COMPANY_NAME}
-          </p>
-        </div>
-
-        <div className="text-right">
-          <p className="text-[10px] text-white/60">Status</p>
-          <p className="mt-1 text-xs font-semibold text-white">
-            Secure Checkout
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PaymentIntroPanel() {
-  return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-accent p-7 md:p-8 xl:p-9">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_32%)]" />
-      <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
-      <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
-
-      <div className="relative flex h-full min-h-[560px] flex-col justify-between">
-        <div>
-          <div className="inline-flex rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white/90 backdrop-blur-md">
-            Secure Payment Portal
-          </div>
-
-          <h3 className="mt-5 max-w-md text-3xl font-black leading-tight text-white md:text-4xl">
-            Fast, Safe & Trusted Online Payments
-          </h3>
-
-          <p className="mt-4 max-w-sm text-sm leading-6 text-white/80">
-            Complete your payment securely through our hosted payment gateway.
-            This page is prepared for demo purposes for {COMPANY_NAME}.
-          </p>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20, rotate: -2 }}
-          animate={{ opacity: 1, y: 0, rotate: -2 }}
-          transition={{ duration: 0.6 }}
-          className="mt-8 w-full max-w-md"
-        >
-          <DemoPaymentCard />
-        </motion.div>
-
-        <div className="mt-6 rounded-xl border border-white/15 bg-white/10 p-3 text-xs leading-5 text-white/85 backdrop-blur-md">
-          Demo page only. No real card number, bank logo, or bank account number
-          is shown here.
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PaymentFormPanel() {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    reference: '',
-    email: '',
-    mobile: '',
-    amount: '',
+  Object.entries(fields).forEach(([name, value]) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
   });
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handleProceed = () => {
-    window.open(IPAYOS_URL, '_blank', 'noopener,noreferrer');
-  };
-
-  return (
-    <div className="bg-background/95 p-7 md:p-8 xl:p-9">
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45 }}
-        className="mx-auto w-full max-w-3xl"
-      >
-        <div className="mb-6">
-          <div className="inline-flex rounded-full border border-accent/20 bg-accent/10 px-3.5 py-1.5 text-xs font-bold text-accent">
-            Powered by iPayOS
-          </div>
-
-          <h4 className="mt-4 text-2xl font-black tracking-tight text-primary md:text-3xl">
-            Enter Payment Information
-          </h4>
-
-          <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
-            Fill in the details below and continue to the secure hosted payment
-            page for {COMPANY_NAME}.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {fields.map((field) => (
-            <CommonInputField
-              key={field.id}
-              field={field}
-              value={formData[field.id]}
-              onChange={handleChange}
-            />
-          ))}
-        </div>
-
-        <div className="mt-5 grid gap-3 md:grid-cols-3">
-          {infoCards.map((item) => (
-            <CommonInfoCard key={item.title} item={item} />
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <button
-            type="button"
-            onClick={handleProceed}
-            className="group flex w-full items-center justify-center rounded-xl bg-accent px-5 py-3.5 text-base font-bold text-white shadow-lg shadow-accent/20 transition hover:-translate-y-0.5 hover:bg-accent/90"
-          >
-            Proceed to Payment
-          </button>
-
-          <p className="mt-3 text-center text-xs text-muted-foreground">
-            Demo page only. No real account or card number is displayed.
-          </p>
-        </div>
-      </motion.div>
-    </div>
-  );
+  document.body.appendChild(form);
+  form.submit();
+  form.remove();
 }
 
 export function OnlinePaymentForm() {
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notice, setNotice] = useState<{
+    type: 'success' | 'error' | 'info';
+    message: string;
+  } | null>(null);
+
+  const amountPreview = useMemo(() => {
+    const amount = Number(formData.amount || 0);
+    if (!Number.isFinite(amount) || amount <= 0) return 'LKR 0.00';
+    return new Intl.NumberFormat('en-LK', {
+      style: 'currency',
+      currency: 'LKR',
+      minimumFractionDigits: 2,
+    }).format(amount);
+  }, [formData.amount]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setNotice(null);
+
+    if (!formData.name || !formData.email || !formData.mobile || !formData.amount) {
+      setNotice({ type: 'error', message: 'Please fill name, email, mobile and amount.' });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/payments/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = (await response.json()) as CreatePaymentResponse;
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.message || 'Unable to create payment request.');
+      }
+
+      if (data.mode === 'payhere_redirect' && data.endpoint && data.fields) {
+        setNotice({ type: 'info', message: 'Redirecting to secure PayHere checkout...' });
+        submitPayHereForm(data.endpoint, data.fields);
+        return;
+      }
+
+      setNotice({
+        type: 'success',
+        message:
+          data.message ||
+          `Payment request saved. Reference: ${data.orderId}. Online gateway can be enabled after approval.`,
+      });
+    } catch (error) {
+      setNotice({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Something went wrong. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <section className="w-full px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mx-auto w-full max-w-[1180px]">
-        <div className="overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-xl">
-          <div className="grid lg:grid-cols-[0.9fr_1.25fr]">
-            <PaymentIntroPanel />
-            <PaymentFormPanel />
+    <section className="relative w-full overflow-hidden rounded-[2rem] border border-border/70 bg-card shadow-2xl shadow-black/5">
+      <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
+      <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+
+      <div className="relative grid gap-0 lg:grid-cols-[0.92fr_1.08fr]">
+        <motion.aside
+          initial={{ opacity: 0, x: -18 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.45 }}
+          className="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-accent p-7 text-white sm:p-9"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.24),transparent_28%),radial-gradient(circle_at_80%_40%,rgba(255,255,255,0.16),transparent_30%)]" />
+
+          <div className="relative flex h-full min-h-[420px] flex-col justify-between gap-10">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold backdrop-blur">
+                <ShieldCheck className="h-4 w-4" />
+                Secure Payment Request
+              </div>
+
+              <h3 className="mt-8 text-3xl font-black leading-tight sm:text-4xl">
+                Pay {COMPANY_NAME} safely and smoothly.
+              </h3>
+
+              <p className="mt-4 max-w-sm text-sm leading-6 text-white/75">
+                This frontend is ready now. The backend is already prepared, and PayHere can be connected later by adding your approved merchant credentials only on the server.
+              </p>
+            </div>
+
+            <div className="rounded-[1.6rem] border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-md">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/60">
+                    Amount
+                  </p>
+                  <p className="mt-2 text-3xl font-black">{amountPreview}</p>
+                </div>
+                <div className="rounded-2xl bg-white/15 p-3">
+                  <WalletCards className="h-7 w-7" />
+                </div>
+              </div>
+
+              <div className="mt-8 grid grid-cols-2 gap-3 text-xs text-white/70">
+                <div className="rounded-2xl bg-white/10 p-3">
+                  <LockKeyhole className="mb-2 h-4 w-4" />
+                  Server hash only
+                </div>
+                <div className="rounded-2xl bg-white/10 p-3">
+                  <Sparkles className="mb-2 h-4 w-4" />
+                  Gateway-ready
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.aside>
+
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.08 }}
+          className="relative p-6 sm:p-8 lg:p-10"
+        >
+          <div className="mb-8">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-accent">
+              Online payment
+            </p>
+            <h2 className="mt-2 text-3xl font-black tracking-tight text-primary sm:text-4xl">
+              Payment Details
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              Fill the details below. For now, the request is safely sent to your backend. After PayHere approval, add environment keys and the same button will redirect to PayHere.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="space-y-2">
+                <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <User className="h-3.5 w-3.5" /> Payer Name
+                </span>
+                <input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Enter full name"
+                  className={inputBase}
+                />
+              </label>
+
+              <label className="space-y-2">
+                <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <Phone className="h-3.5 w-3.5" /> Mobile Number
+                </span>
+                <input
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  placeholder="07X XXX XXXX"
+                  className={inputBase}
+                />
+              </label>
+            </div>
+
+            <label className="space-y-2 block">
+              <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <Mail className="h-3.5 w-3.5" /> Email Address
+              </span>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="customer@example.com"
+                className={inputBase}
+              />
+            </label>
+
+            <div className="grid gap-4 sm:grid-cols-[0.8fr_1.2fr]">
+              <label className="space-y-2">
+                <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <CreditCard className="h-3.5 w-3.5" /> Amount LKR
+                </span>
+                <input
+                  type="number"
+                  min="1"
+                  step="0.01"
+                  name="amount"
+                  value={formData.amount}
+                  onChange={handleChange}
+                  placeholder="0.00"
+                  className={inputBase}
+                />
+              </label>
+
+              <label className="space-y-2">
+                <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <ReceiptText className="h-3.5 w-3.5" /> Reference / Reason
+                </span>
+                <input
+                  name="reference"
+                  value={formData.reference}
+                  onChange={handleChange}
+                  placeholder="Invoice number or service reason"
+                  className={inputBase}
+                />
+              </label>
+            </div>
+
+            {notice && (
+              <div
+                className={`flex gap-3 rounded-2xl border p-4 text-sm ${
+                  notice.type === 'success'
+                    ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-700'
+                    : notice.type === 'error'
+                      ? 'border-red-500/25 bg-red-500/10 text-red-700'
+                      : 'border-accent/25 bg-accent/10 text-accent'
+                }`}
+              >
+                {notice.type === 'success' ? (
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
+                ) : (
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                )}
+                <span>{notice.message}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-sm font-black text-white shadow-lg shadow-accent/20 transition hover:-translate-y-0.5 hover:bg-accent/90 disabled:pointer-events-none disabled:opacity-70"
+            >
+              {isSubmitting ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <LockKeyhole className="h-4 w-4" />
+              )}
+              {isSubmitting ? 'Preparing secure request...' : 'Continue Secure Payment'}
+              {!isSubmitting && <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />}
+            </button>
+
+            <p className="text-center text-xs leading-5 text-muted-foreground">
+              No card details are collected on this website. When enabled, PayHere will handle the secure checkout screen.
+            </p>
+          </form>
+        </motion.div>
       </div>
     </section>
   );

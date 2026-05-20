@@ -77,30 +77,7 @@ export function PaymentPortal() {
               transition={{ duration: 0.3 }}
               className="w-full"
             >
-              <div
-                id="online-payment"
-                className="mx-auto mb-8 w-full max-w-[1200px] px-4 text-center sm:px-6 lg:px-8"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: 0.05 }}
-                  className="mx-auto max-w-3xl"
-                >
-                  <span className="mb-3 inline-flex rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-accent">
-                    Secure Online Checkout
-                  </span>
 
-                  <h2 className="mb-3 text-4xl font-black tracking-[-0.04em] text-primary md:text-5xl">
-                    Online Payment
-                  </h2>
-
-                  <p className="mx-auto max-w-2xl text-base font-medium leading-7 text-muted-foreground md:text-lg">
-                    Pay securely using your credit or debit card via the iPayOS
-                    gateway.
-                  </p>
-                </motion.div>
-              </div>
 
               <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8">
                 <OnlinePaymentForm />
