@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { BadgeDollarSign, BriefcaseBusiness, ShieldCheck, Users } from 'lucide-react';
 
 export function Stats() {
   const ref = useRef(null);
@@ -37,29 +37,29 @@ export function Stats() {
     {
       value: `${displayValues.clients}+`,
       label: 'Satisfied Clients',
-      icon: '👥',
+      icon: Users,
     },
     {
       value: `$${displayValues.revenue}M+`,
       label: 'Tax Savings Delivered',
-      icon: '💰',
+      icon: BadgeDollarSign,
     },
     {
       value: `${displayValues.experience}+`,
       label: 'Years Experience',
-      icon: '📈',
+      icon: BriefcaseBusiness,
     },
     {
       value: `${displayValues.success}%`,
       label: 'Success Rate',
-      icon: '✅',
+      icon: ShieldCheck,
     },
   ];
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-card/50 border-y border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section ref={ref} className="border-y border-border bg-card/50 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -68,11 +68,13 @@ export function Stats() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="text-4xl mb-2">{stat.icon}</div>
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                {stat.value}
+              <div className="mb-3 flex justify-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F7C948] text-[#0B1F3A] shadow-sm">
+                  <stat.icon className="h-9 w-9 stroke-[2.2]" />
+                </div>
               </div>
-              <p className="text-muted-foreground font-medium">{stat.label}</p>
+              <div className="mb-2 text-4xl font-bold text-primary md:text-5xl">{stat.value}</div>
+              <p className="font-medium text-muted-foreground">{stat.label}</p>
             </motion.div>
           ))}
         </div>
