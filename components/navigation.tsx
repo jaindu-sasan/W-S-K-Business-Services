@@ -91,8 +91,14 @@ export function Navigation() {
             className="group inline-flex items-center gap-3 rounded-full bg-[#D4A017] px-2 py-1 text-base font-semibold text-[#0B1F3A] transition-all duration-300 hover:scale-105 hover:bg-[#c89512]"
           >
             Contact Us
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1">
-              <ArrowRight size={16} />
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
+              <motion.span
+                animate={{ x: [-2, 4, -2] }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+                className="inline-flex"
+              >
+                <ArrowRight size={18} />
+              </motion.span>
             </span>
           </Link>
         </div>
@@ -151,7 +157,13 @@ export function Navigation() {
               >
                 Contact Us
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
-                  <ArrowRight size={16} />
+                  <motion.span
+                    animate={{ x: [-2, 4, -2] }}
+                    transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+                    className="inline-flex"
+                  >
+                    <ArrowRight size={18} />
+                  </motion.span>
                 </span>
               </Link>
             </div>

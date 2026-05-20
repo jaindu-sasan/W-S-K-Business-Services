@@ -32,19 +32,19 @@ export function ContactHero() {
   ];
 
   return (
-    <section className="relative min-h-screen pt-24 pb-20 overflow-hidden">
+    <section className="relative min-h-[78vh] overflow-hidden pb-12 pt-20 md:min-h-[72vh] md:pb-14 md:pt-24">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/123.png')" }}
       />
-      <div className="absolute inset-0 bg-background/70" />
+      <div className="absolute inset-0 bg-background/45" />
 
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center space-y-8 mb-16"
+          className="mb-12 space-y-6 text-center"
         >
           <h1 className="text-5xl md:text-6xl font-bold text-primary leading-tight">
             Let&apos;s Work Together

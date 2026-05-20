@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import {
   ArrowRight,
   Calculator,
@@ -11,6 +12,51 @@ import {
 } from 'lucide-react';
 
 export function TaxSection() {
+  const statsRef = useRef<HTMLDivElement | null>(null);
+  const statsInView = useInView(statsRef, { once: true, margin: '-80px' });
+  const [taxYearCount, setTaxYearCount] = useState(0);
+  const [reliefCount, setReliefCount] = useState(0);
+
+  useEffect(() => {
+    if (!statsInView) return;
+
+    let yearFrame = 0;
+    let reliefFrame = 0;
+
+    const animateCount = (
+      target: number,
+      duration: number,
+      setValue: (value: number) => void,
+      setFrame: (id: number) => void
+    ) => {
+      const startTime = performance.now();
+
+      const step = (time: number) => {
+        const progress = Math.min((time - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setValue(Math.floor(target * eased));
+
+        if (progress < 1) {
+          setFrame(requestAnimationFrame(step));
+        }
+      };
+
+      setFrame(requestAnimationFrame(step));
+    };
+
+    animateCount(2025, 1200, setTaxYearCount, (id) => {
+      yearFrame = id;
+    });
+    animateCount(150, 1100, setReliefCount, (id) => {
+      reliefFrame = id;
+    });
+
+    return () => {
+      cancelAnimationFrame(yearFrame);
+      cancelAnimationFrame(reliefFrame);
+    };
+  }, [statsInView]);
+
   return (
     <section className="relative overflow-hidden bg-[#F5F7FA] py-24">
       <div className="absolute -right-24 top-20 h-[420px] w-[420px] rounded-full bg-[#D4A017]/10 blur-3xl" />
@@ -82,7 +128,11 @@ export function TaxSection() {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="rounded-[36px] bg-white p-8 shadow-2xl">
+          <motion.div
+            whileInView={{ scale: [1, 1.015, 1], y: [0, -4, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            className="rounded-[36px] bg-white p-8 shadow-2xl"
+          >
             <div className="mb-8 flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-slate-500">
@@ -93,9 +143,13 @@ export function TaxSection() {
                 </h3>
               </div>
 
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#D4A017]">
+              <motion.div
+                animate={{ scale: [1, 1.08, 1] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#D4A017]"
+              >
                 <Calculator className="h-8 w-8 text-white" />
-              </div>
+              </motion.div>
             </div>
 
             <div className="space-y-5">
@@ -107,7 +161,13 @@ export function TaxSection() {
                   </span>
                 </div>
                 <div className="h-3 overflow-hidden rounded-full bg-[#F5F7FA]">
-                  <div className="h-full w-[75%] rounded-full bg-[#D4A017]" />
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '75%' }}
+                    transition={{ duration: 1.1, delay: 0.15, ease: 'easeOut' }}
+                    viewport={{ once: true }}
+                    className="h-full rounded-full bg-[#D4A017]"
+                  />
                 </div>
               </div>
 
@@ -119,27 +179,43 @@ export function TaxSection() {
                   </span>
                 </div>
                 <div className="h-3 overflow-hidden rounded-full bg-[#F5F7FA]">
-                  <div className="h-full w-[35%] rounded-full bg-[#0B1F3A]" />
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '35%' }}
+                    transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
+                    viewport={{ once: true }}
+                    className="h-full rounded-full bg-[#0B1F3A]"
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-[#F5F7FA] p-5">
+            <div ref={statsRef} className="mt-8 grid grid-cols-2 gap-4">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="rounded-2xl bg-[#F5F7FA] p-5"
+              >
                 <p className="text-sm text-slate-500">Tax Year</p>
-                <h4 className="mt-2 text-3xl font-semibold text-[#0B1F3A]">
-                  2025
-                </h4>
-              </div>
+                <h4 className="mt-2 text-3xl font-semibold text-[#0B1F3A]">{taxYearCount}</h4>
+              </motion.div>
 
-              <div className="rounded-2xl bg-[#F5F7FA] p-5">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="rounded-2xl bg-[#F5F7FA] p-5"
+              >
                 <p className="text-sm text-slate-500">Relief</p>
-                <h4 className="mt-2 text-3xl font-semibold text-[#0B1F3A]">
-                  150K
-                </h4>
-              </div>
+                <h4 className="mt-2 text-3xl font-semibold text-[#0B1F3A]">{reliefCount}K</h4>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -114,7 +114,7 @@ export function ContactForm() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-background border border-border rounded-lg p-8 md:p-12 space-y-6"
+            className="space-y-6 rounded-lg border border-[#DCE6F2] bg-[#EEF4FB] p-8 md:p-12"
           >
             {/* Name & Email Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -129,7 +129,7 @@ export function ContactForm() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent"
+                  className="w-full rounded-lg border border-border bg-white px-4 py-3 text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none"
                   placeholder="John Doe"
                 />
               </div>
@@ -144,7 +144,7 @@ export function ContactForm() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent"
+                  className="w-full rounded-lg border border-border bg-white px-4 py-3 text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none"
                   placeholder="john@example.com"
                 />
               </div>
@@ -162,7 +162,7 @@ export function ContactForm() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent"
+                  className="w-full rounded-lg border border-border bg-white px-4 py-3 text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none"
                   placeholder="(123) 456-7890"
                 />
               </div>
@@ -179,7 +179,7 @@ export function ContactForm() {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent"
+                  className="w-full rounded-lg border border-border bg-white px-4 py-3 text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none"
                   placeholder="Your Company"
                 />
               </div>
@@ -195,7 +195,7 @@ export function ContactForm() {
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:border-accent"
+                className="w-full rounded-lg border border-border bg-white px-4 py-3 text-foreground focus:border-accent focus:outline-none"
               >
                 {services.map((svc) => (
                   <option key={svc.value} value={svc.value}>
@@ -217,7 +217,7 @@ export function ContactForm() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent resize-none"
+                className="w-full resize-none rounded-lg border border-border bg-white px-4 py-3 text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none"
                 placeholder="Tell us about your financial needs and goals..."
               ></textarea>
             </div>

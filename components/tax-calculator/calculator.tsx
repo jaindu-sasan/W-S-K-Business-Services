@@ -177,24 +177,6 @@ export function Calculator() {
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <Card className="p-5 border-border/80 shadow-md">
-              <h3 className="text-xl font-bold text-primary">Annual Income Tax Calculator</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Calculate tax based on your taxable annual income with quarterly payment details.
-              </p>
-              <button
-                type="button"
-                onClick={() => setActiveCalculator('annual')}
-                className={`mt-4 rounded-md px-5 py-2 text-sm font-medium transition-colors ${
-                  activeCalculator === 'annual'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'border border-orange-400 text-orange-600 hover:bg-orange-50'
-                }`}
-              >
-                Open Annual Calculator
-              </button>
-            </Card>
-
-            <Card className="p-5 border-border/80 shadow-md">
               <h3 className="text-xl font-bold text-primary">Monthly Salary Tax Calculator</h3>
               <p className="mt-2 text-sm text-muted-foreground">
                 Enter your monthly salary and view monthly tax, annual estimate, and quarter payment.
@@ -209,6 +191,24 @@ export function Calculator() {
                 }`}
               >
                 Open Monthly Calculator
+              </button>
+            </Card>
+
+            <Card className="p-5 border-border/80 shadow-md">
+              <h3 className="text-xl font-bold text-primary">Annual Income Tax Calculator</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Calculate tax based on your taxable annual income with quarterly payment details.
+              </p>
+              <button
+                type="button"
+                onClick={() => setActiveCalculator('annual')}
+                className={`mt-4 rounded-md px-5 py-2 text-sm font-medium transition-colors ${
+                  activeCalculator === 'annual'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'border border-orange-400 text-orange-600 hover:bg-orange-50'
+                }`}
+              >
+                Open Annual Calculator
               </button>
             </Card>
           </div>
