@@ -11,15 +11,15 @@ export function CTA() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl"></div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-4 lg:px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-5"
+          className="w-full text-center space-y-5"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-balance">
+          <h2 className="text-3xl md:text-4xl font-bold text-balance">
             Ready to Transform Your Finances?
           </h2>
 
@@ -50,7 +50,7 @@ export function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-4 border-t border-primary-foreground/20"
+            className="w-full flex flex-col sm:flex-row gap-4 justify-center pt-4 border-t border-primary-foreground/20"
           >
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5" />

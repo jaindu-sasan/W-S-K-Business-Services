@@ -36,12 +36,12 @@ export function Footer() {
     <>
       
       <footer className="bg-primary text-primary-foreground">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-4 lg:px-4">
         {/* Main Footer Content */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="mb-4 flex items-center gap-3 text-2xl font-bold">
+            <Link href="/" className="mb-3 flex items-center gap-3 text-2xl font-bold">
               <Image
                 src="/wsklogo.png"
                 alt="WSK logo"
@@ -51,10 +51,10 @@ export function Footer() {
               />
               <span>WSK</span>
             </Link>
-            <p className="text-primary-foreground/70 text-sm mb-6">
+            <p className="text-primary-foreground/70 text-sm mb-4">
               Premier financial solutions for businesses of all sizes.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               {[
                 { icon: Facebook, href: '#' },
                 { icon: Twitter, href: '#' },
@@ -76,8 +76,8 @@ export function Footer() {
           {/* Footer Links */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h3 className="font-semibold mb-4">{title}</h3>
-              <ul className="space-y-2">
+              <h3 className="font-semibold mb-3">{title}</h3>
+              <ul className="space-y-1.5">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -99,27 +99,27 @@ export function Footer() {
         </div>
 
         {/* Contact Section */}
-        <div className="border-t border-primary-foreground/10 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex items-center gap-4">
+        <div className="border-t border-primary-foreground/10 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-accent" />
               <div>
                 <p className="text-sm text-primary-foreground/70">Phone</p>
-                <a href="tel:+1234567890" className="font-semibold hover:underline">
-                  (123) 456-7890
+                <a href="tel:+94115044433" className="font-semibold hover:underline">
+                  011 5044 433
                 </a>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-accent" />
               <div>
                 <p className="text-sm text-primary-foreground/70">Email</p>
-                <a href="mailto:info@wskbusiness.com" className="font-semibold hover:underline">
-                  info@wskbusiness.com
+                <a href="mailto:admin@wskbiz.com" className="font-semibold hover:underline">
+                  admin@wskbiz.com
                 </a>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <MapPin className="w-5 h-5 text-accent" />
               <div>
                 <p className="text-sm text-primary-foreground/70">Address</p>
@@ -130,7 +130,7 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-primary-foreground/10 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-primary-foreground/10 py-5 flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="text-primary-foreground/70 text-sm">
             &copy; {currentYear} WSK Business Services. All rights reserved.
           </p>
