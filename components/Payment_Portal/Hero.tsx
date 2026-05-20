@@ -2,21 +2,22 @@
 
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import { Globe, Landmark, ShieldCheck, Zap } from 'lucide-react';
 
 type PaymentHeroProps = {
   action?: ReactNode;
 };
 
 const trustBadges = [
-  { icon: '🛡️', label: '256-bit SSL' },
-  { icon: '⚡', label: 'Instant Confirmation' },
-  { icon: '🏦', label: '9 Local Banks' },
-  { icon: '🌐', label: 'Foreign Currency' },
+  { icon: ShieldCheck, label: '256-bit SSL' },
+  { icon: Zap, label: 'Instant Confirmation' },
+  { icon: Landmark, label: '9 Local Banks' },
+  { icon: Globe, label: 'Foreign Currency' },
 ];
 
 export function PaymentHero({ action }: PaymentHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background to-card/20 pt-20 pb-10 md:pt-24 md:pb-12">
+    <section className="relative overflow-hidden bg-gradient-to-b from-background to-card/20 pb-10 pt-20 md:pb-12 md:pt-24">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 0.45, scale: 1 }}
@@ -41,40 +42,11 @@ export function PaymentHero({ action }: PaymentHeroProps) {
           transition={{ duration: 0.65, ease: 'easeOut' }}
           className="text-center"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.45, delay: 0.1 }}
-            className="inline-block"
-          >
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-              className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3.5 py-1.5"
-            >
-              <motion.span
-                animate={{ rotate: [0, -8, 8, 0] }}
-                transition={{
-                  duration: 1.8,
-                  repeat: Infinity,
-                  repeatDelay: 2.5,
-                }}
-                className="text-xl"
-              >
-                🔐
-              </motion.span>
-
-              <span className="text-xs font-semibold text-foreground">
-                Secure Payments
-              </span>
-            </motion.div>
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.18 }}
-            className="mx-auto mt-5 max-w-3xl text-4xl font-bold leading-tight text-primary md:text-5xl"
+            className="mx-auto mt-2 max-w-3xl text-4xl font-bold leading-tight text-primary md:text-5xl"
           >
             Pay Online or via Bank
           </motion.h1>
@@ -126,7 +98,7 @@ export function PaymentHero({ action }: PaymentHeroProps) {
                 transition={{ type: 'spring', stiffness: 260, damping: 20 }}
                 className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground shadow-sm"
               >
-                <span>{badge.icon}</span>
+                <badge.icon className="h-3.5 w-3.5 text-[#D4A017]" />
                 <span>{badge.label}</span>
               </motion.div>
             ))}

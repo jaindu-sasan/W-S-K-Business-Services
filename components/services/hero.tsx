@@ -46,10 +46,6 @@ export function ServicesHero() {
               transition={{ duration: 0.5 }}
               className="mx-auto max-w-4xl text-center md:absolute md:inset-0 md:flex md:flex-col md:justify-center"
             >
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#D4A017]/25 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#D4A017] shadow-sm">
-                Accounting and Business Advisory
-              </div>
-
               <h1 className="text-5xl font-bold leading-tight text-[#0B1F3A] md:text-6xl lg:text-7xl">
                 Our Services
               </h1>
@@ -86,10 +82,6 @@ export function ServicesHero() {
               transition={{ duration: 0.5 }}
               className="mx-auto max-w-5xl text-center md:absolute md:inset-0 md:flex md:flex-col md:justify-center"
             >
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#D4A017]/25 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#D4A017] shadow-sm">
-                WSK Services
-              </div>
-
               <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-[#D4A017] text-[#0B1F3A]">
                 <ShieldCheck className="h-6 w-6" />
               </div>

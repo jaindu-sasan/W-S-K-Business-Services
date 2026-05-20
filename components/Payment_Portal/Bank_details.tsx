@@ -22,61 +22,12 @@ const ACCOUNT_HOLDER = 'WSK BUSINESS SERVICES';
 
 const localBanks: BankAccount[] = [
   {
-    name: 'Commercial Bank',
-    logo: '/bank-logos/commercial-bank.png',
-    branch: 'Nawala',
-    accountNo: 'XXXXX',
-    accountType: 'Current',
-    holder: ACCOUNT_HOLDER,
-  },
-  {
     name: 'Hatton National Bank',
     displayName: 'HNB Bank',
     logo: '/bank-logos/hnb.png',
     branch: 'Battaramulla',
     accountNo: 'XXXXX',
     accountType: 'Current',
-    holder: ACCOUNT_HOLDER,
-  },
-  {
-    name: 'Sampath Bank',
-    logo: '/bank-logos/sampath-bank.png',
-    branch: 'Battaramulla',
-    accountNo: 'XXXXX',
-    accountType: 'Current',
-    holder: ACCOUNT_HOLDER,
-  },
-  {
-    name: 'NDB Bank',
-    logo: '/bank-logos/ndb-bank.png',
-    branch: 'Rajagiriya',
-    accountNo: 'XXXXX',
-    accountType: 'Savings',
-    holder: ACCOUNT_HOLDER,
-  },
-  {
-    name: 'Nations Trust Bank',
-    displayName: 'NTB Bank',
-    logo: '/bank-logos/nations-trust-bank.png',
-    branch: 'Nawala',
-    accountNo: 'XXXXX',
-    accountType: 'Savings',
-    holder: ACCOUNT_HOLDER,
-  },
-  {
-    name: 'Bank of Ceylon',
-    logo: '/bank-logos/bank-of-ceylon.png',
-    branch: 'Battaramulla',
-    accountNo: 'XXXXX',
-    accountType: 'Savings',
-    holder: ACCOUNT_HOLDER,
-  },
-  {
-    name: "People's Bank",
-    logo: '/bank-logos/peoples-bank.png',
-    branch: 'Battaramulla',
-    accountNo: 'XXXXX',
-    accountType: 'Savings',
     holder: ACCOUNT_HOLDER,
   },
   {
@@ -87,38 +38,7 @@ const localBanks: BankAccount[] = [
     accountType: 'Savings',
     holder: ACCOUNT_HOLDER,
   },
-  {
-    name: 'Cargills Bank',
-    logo: '/bank-logos/cargills-bank.png',
-    branch: 'Rajagiriya',
-    accountNo: 'XXXXX',
-    accountType: 'Current',
-    holder: ACCOUNT_HOLDER,
-  },
 ];
-
-const foreignBanks: BankAccount[] = [
-  {
-    name: 'Metropolitan Commercial Bank',
-    displayName: 'Metropolitan Commercial Bank USA',
-    logo: '/bank-logos/metropolitan-commercial-bank.png',
-    accountNo: 'XXXXX',
-    swift: 'XXXXX',
-    aba: 'XXXXX',
-    note: 'Demo account details only. Replace with real details when required.',
-    tag: 'USD receiving account',
-  },
-  {
-    name: 'First Century Bank',
-    displayName: 'First Century Bank USA',
-    logo: '/bank-logos/first-century-bank.png',
-    accountNo: 'XXXXX',
-    note: 'Demo account details only. Replace with real details when required.',
-    tag: 'USA payments only',
-  },
-];
-
-const currencies = ['USD', 'GBP', 'AUD', 'SGD', 'Payoneer'];
 
 function getInitials(name: string) {
   return name
@@ -310,47 +230,6 @@ export function BankDetails() {
         </div>
       </section>
 
-      <section>
-        <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeader
-            eyebrow="International"
-            title="Foreign Currency Payments"
-            description="Demo international payment details only."
-          />
-
-          <div className="flex flex-wrap gap-2">
-            {currencies.map((currency) => (
-              <span
-                key={currency}
-                className="rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-sm font-bold text-accent"
-              >
-                {currency}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          {foreignBanks.map((bank, index) => (
-            <CommonBankCard
-              key={bank.name}
-              bank={bank}
-              index={index}
-              variant="foreign"
-            />
-          ))}
-        </div>
-      </section>
-
-      <div className="rounded-2xl border border-accent/20 bg-card p-6 text-center shadow-sm">
-        <p className="text-lg font-black text-primary">
-          Need help or made a payment?
-        </p>
-
-        <p className="mt-2 text-sm text-muted-foreground">
-          Contact WSK BUSINESS SERVICES for payment confirmation.
-        </p>
-      </div>
     </motion.section>
   );
 }

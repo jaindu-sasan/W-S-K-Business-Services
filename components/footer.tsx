@@ -52,7 +52,7 @@ export function Footer() {
               />
               <span>WSK</span>
             </Link>
-            <p className="text-primary-foreground/70 text-sm mb-4">
+            <p className="mb-4 text-base text-primary-foreground/70">
               Premier financial solutions for businesses of all sizes.
             </p>
             <div className="flex gap-3">
@@ -77,14 +77,14 @@ export function Footer() {
           {/* Footer Links */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h3 className="font-semibold mb-3">{title}</h3>
+              <h3 className="mb-3 text-lg font-semibold">{title}</h3>
               <ul className="space-y-1.5">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
                       className={cn(
-                        'transition-colors text-sm',
+                        'text-base transition-colors',
                         pathname === link.href
                           ? 'text-accent font-semibold'
                           : 'text-primary-foreground/70 hover:text-primary-foreground'
@@ -105,8 +105,8 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-accent" />
               <div>
-                <p className="text-sm text-primary-foreground/70">Phone</p>
-                <a href="tel:+94115044433" className="font-semibold hover:underline">
+                <p className="text-base text-primary-foreground/70">Phone</p>
+                <a href="tel:+94115044433" className="text-lg font-semibold hover:underline">
                   011 5044 433
                 </a>
               </div>
@@ -114,8 +114,8 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-accent" />
               <div>
-                <p className="text-sm text-primary-foreground/70">Email</p>
-                <a href="mailto:admin@wskbiz.com" className="font-semibold hover:underline">
+                <p className="text-base text-primary-foreground/70">Email</p>
+                <a href="mailto:admin@wskbiz.com" className="text-lg font-semibold hover:underline">
                   admin@wskbiz.com
                 </a>
               </div>
@@ -123,8 +123,8 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <MapPin className="w-5 h-5 text-accent" />
               <div>
-                <p className="text-sm text-primary-foreground/70">Address</p>
-                <p className="font-semibold">123 Business St, Suite 100</p>
+                <p className="text-base text-primary-foreground/70">Address</p>
+                <p className="text-lg font-semibold">123 Business St, Suite 100</p>
               </div>
             </div>
           </div>
@@ -132,10 +132,10 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="flex flex-col items-center justify-between gap-3 border-t border-primary-foreground/10 py-6 md:flex-row">
-          <p className="text-primary-foreground/70 text-sm">
+          <p className="text-base text-primary-foreground/70">
             &copy; {currentYear} WSK Business Services. All rights reserved.
           </p>
-          <p className="text-primary-foreground/70 text-sm">
+          <p className="text-base text-primary-foreground/70">
             Designed & built with care for your financial success.
           </p>
         </div>

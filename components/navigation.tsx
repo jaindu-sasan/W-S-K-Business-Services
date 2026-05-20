@@ -54,7 +54,7 @@ export function Navigation() {
             className="h-11 w-11 rounded-xl object-contain"
             priority
           />
-          <h2 className="text-2xl font-bold text-[#0B1F3A]">WSK</h2>
+          <h2 className="text-[28px] font-bold text-[#0B1F3A]">WSK</h2>
         </Link>
 
         {/* DESKTOP MENU */}
@@ -64,7 +64,7 @@ export function Navigation() {
               key={link.name}
               href={link.href}
               className={cn(
-                'text-sm font-medium transition pb-1 border-b-2',
+                'text-base font-medium transition pb-1 border-b-2',
                 isActiveLink(link.href)
                   ? 'text-[#D4A017] border-[#D4A017]'
                   : 'text-[#0B1F3A] border-transparent hover:text-[#D4A017]'
@@ -77,7 +77,7 @@ export function Navigation() {
           {/* PAYMENT BUTTON (kept feature) */}
           <Link
             href="/Payment_portal"
-            className="flex items-center gap-2 border border-[#D4A017] text-[#D4A017] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#D4A017]/10 transition"
+            className="flex items-center gap-2 border border-[#D4A017] text-[#D4A017] px-4 py-2 rounded-lg font-semibold text-base hover:bg-[#D4A017]/10 transition"
           >
             <CreditCard className="w-4 h-4" />
             Pay Online
@@ -88,7 +88,7 @@ export function Navigation() {
         <div className="hidden lg:block">
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-3 rounded-full bg-[#D4A017] px-2 py-1 text-sm font-semibold text-[#0B1F3A] transition-all duration-300 hover:scale-105 hover:bg-[#c89512]"
+            className="group inline-flex items-center gap-3 rounded-full bg-[#D4A017] px-2 py-1 text-base font-semibold text-[#0B1F3A] transition-all duration-300 hover:scale-105 hover:bg-[#c89512]"
           >
             Contact Us
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1">
