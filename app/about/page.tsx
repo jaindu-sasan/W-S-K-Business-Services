@@ -171,19 +171,15 @@ export default function AboutPage() {
             {[
               {
                 name: 'Company Director',
-                role: 'Business & Tax Advisory',
+                role: 'Founder/ CEO',
                 image: '/images/team/team-1.jpg',
               },
               {
-                name: 'Senior Consultant',
-                role: 'Accounting & Compliance',
+                name: 'Madhu Weththasinghe',
+                role: 'Senior Consultant',
                 image: '/images/team/team-2.jpg',
               },
-              {
-                name: 'Corporate Advisor',
-                role: 'Company Registration Support',
-                image: '/images/team/team-3.jpg',
-              },
+             
             ].map((member, index) => (
               <motion.div
                 key={member.role}
