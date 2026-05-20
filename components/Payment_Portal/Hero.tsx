@@ -17,7 +17,18 @@ const trustBadges = [
 
 export function PaymentHero({ action }: PaymentHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background to-card/20 pb-10 pt-20 md:pb-12 md:pt-24">
+    <section
+      className="relative overflow-hidden pb-10 pt-20 md:pb-12 md:pt-24"
+      style={{
+        backgroundImage:  `url('https://images.pexels.com/photos/164501/pexels-photo-164501.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/75 via-background/70 to-background/85" />
+
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 0.45, scale: 1 }}
@@ -35,7 +46,7 @@ export function PaymentHero({ action }: PaymentHeroProps) {
         className="absolute right-10 top-24 hidden h-20 w-20 rounded-full border border-accent/20 bg-accent/5 md:block"
       />
 
-      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +107,7 @@ export function PaymentHero({ action }: PaymentHeroProps) {
                 }}
                 whileHover={{ y: -3, scale: 1.03 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground shadow-sm"
+                className="flex items-center gap-2 rounded-full border border-border bg-card/90 px-3 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur-md"
               >
                 <badge.icon className="h-3.5 w-3.5 text-[#D4A017]" />
                 <span>{badge.label}</span>

@@ -12,13 +12,7 @@ export function PaymentPortal() {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-background">
-      {/* Real background image */}
-      <div
-        className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/images/payment-bg.jpg')",
-        }}
-      />
+      
 
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 -z-10 bg-background/85" />
