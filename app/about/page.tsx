@@ -170,7 +170,7 @@ export default function AboutPage() {
           <div className="grid gap-8 md:grid-cols-3">
             {[
               {
-                name: 'Company Director',
+                name: 'Suranga Mendis',
                 role: 'Founder/ CEO',
                 image: '/images/team/team-1.jpg',
               },
