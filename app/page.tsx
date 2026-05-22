@@ -9,6 +9,7 @@ import { Footer } from '@/components/footer';
 import { AboutUs } from '@/components/home/aboutUs';
 import { Testimonials } from '@/components/home/testimonials';
 import {TaxSection} from '@/components/home/taxSection'
+import { ClientLogosMarquee } from '@/components/home/client-logos-marquee';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Services />
       <TaxSection/>
       <AboutUs/>
+      <ClientLogosMarquee />
       <Stats />
       <Testimonials/>
       

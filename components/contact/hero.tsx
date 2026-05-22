@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
+const WSK_GOOGLE_MAPS_URL =
+  'https://www.google.com/maps/place/W+S+K+Business+Services/@6.8894214,79.8876087,17z/data=!3m1!4b1!4m6!3m5!1s0x3ae2452e4f1e095f:0x597154db8687103c!8m2!3d6.8894214!4d79.8876087!16s%2Fg%2F11c2l3v4s6?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D';
+
 export function ContactHero() {
   const contactInfo = [
     {
@@ -20,8 +23,10 @@ export function ContactHero() {
     {
       icon: MapPin,
       label: 'Office',
-      value: 'No. 329/1 Nawala Rd, Sri Jayawardenepura Kotte',
-      href: '#',
+      value: 'No. 329/1 Nawala Rd, Sri Jayawardenepura Kotte.',
+      href: WSK_GOOGLE_MAPS_URL,
+      external: true,
+      title: 'Open WSK Business Services location in Google Maps',
     },
     {
       icon: Clock,
@@ -69,6 +74,10 @@ export function ContactHero() {
               <motion.a
                 key={info.label}
                 href={info.href}
+                target={info.external ? '_blank' : undefined}
+                rel={info.external ? 'noopener noreferrer' : undefined}
+                title={info.title}
+                aria-label={info.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
