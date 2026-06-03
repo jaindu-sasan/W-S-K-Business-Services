@@ -26,10 +26,8 @@ export function Footer() {
       { label: 'Contact', href: '/contact' },
     ],
     Legal: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
-      { label: 'Disclaimer', href: '#' },
-      { label: 'Sitemap', href: '#' },
+      { label: 'Terms & Privacy Policy', href: '/terms-privacy-policy' },
+      { label: 'Refund Policy', href: '/refund-policy' },
     ],
   };
 
@@ -142,7 +140,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="border-t border-primary-foreground/10 py-6 text-center">
           <p className="text-base text-primary-foreground/70">
-            &copy; {currentYear} WSK Business Services. All Rights Reserved.
+            &copy; {currentYear} W S K Business Services (Pvt) Ltd. All Rights Reserved.
           </p>
           <div className="mx-auto my-2 h-px w-40 bg-primary-foreground/25" />
           <p className="mt-1 text-base text-primary-foreground/70">

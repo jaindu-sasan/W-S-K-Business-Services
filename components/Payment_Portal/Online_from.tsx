@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   AlertCircle,
@@ -37,7 +38,7 @@ type CreatePaymentResponse = {
   fields?: PayHereFieldMap;
 };
 
-const COMPANY_NAME = 'WSK BUSINESS SERVICES';
+const COMPANY_NAME = 'W S K Business Services (Pvt) Ltd';
 
 const initialFormData: FormData = {
   name: '',
@@ -307,6 +308,20 @@ export function OnlinePaymentForm() {
                 <span>{notice.message}</span>
               </div>
             )}
+
+            <div className="rounded-2xl border border-accent/20 bg-accent/10 p-4 text-sm leading-6 text-muted-foreground">
+              <p>
+                Refunds may only be considered for duplicate payments, payments made in error,
+                services paid for but not yet commenced, or where W S K Business Services (Pvt)
+                Ltd is unable to provide the agreed service.
+              </p>
+              <Link
+                href="/refund-policy"
+                className="mt-2 inline-flex font-bold text-accent underline underline-offset-4"
+              >
+                Read full Refund Policy
+              </Link>
+            </div>
 
             <button
               type="submit"

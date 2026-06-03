@@ -17,7 +17,7 @@ export function AboutHero() {
           </h1>
 
           <p className="mx-auto max-w-3xl text-lg text-muted-foreground md:text-xl">
-            For over 15 years, WSK Business Services has been the trusted partner for businesses seeking financial clarity, tax optimization, and strategic growth. Our commitment to excellence has helped hundreds of entrepreneurs achieve their financial goals.
+            For over 15 years, W S K Business Services (Pvt) Ltd has been the trusted partner for businesses seeking financial clarity, tax optimization, and strategic growth. Our commitment to excellence has helped hundreds of entrepreneurs achieve their financial goals.
           </p>
 
           <div className="grid grid-cols-3 gap-8 pt-8">

@@ -30,7 +30,7 @@ export default function AboutPage() {
   <div className="absolute inset-0">
     <Image
       src="/images/about-hero.png"
-      alt="About WSK Business Services"
+      alt="About W S K Business Services (Pvt) Ltd"
       fill
       priority
       className="object-cover"
@@ -56,7 +56,7 @@ export default function AboutPage() {
 
       {/* Description */}
       <p className="mx-auto mt-8 max-w-3xl text-[18px] leading-9 text-white/80">
-        WSK Business Services delivers professional accounting,
+        W S K Business Services (Pvt) Ltd delivers professional accounting,
         taxation, payroll, business registration, and corporate
         consultancy services designed to support business growth
         with confidence, compliance, and financial clarity.
@@ -85,7 +85,7 @@ export default function AboutPage() {
       </h2>
 
       <p className="mx-auto mt-6 max-w-3xl text-[17px] leading-8 text-slate-600">
-        WSK Business Services helps businesses manage accounting, taxation,
+        W S K Business Services (Pvt) Ltd helps businesses manage accounting, taxation,
         payroll, registration, and corporate compliance with reliable
         professional guidance.
       </p>

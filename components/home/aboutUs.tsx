@@ -64,7 +64,7 @@ export function AboutUs() {
 
             {/* Description */}
             <p className="mt-8 text-lg leading-relaxed text-slate-600">
-              WSK Business Services provides trusted accounting,
+              W S K Business Services (Pvt) Ltd provides trusted accounting,
               taxation, payroll, and corporate consultancy
               solutions for businesses across Sri Lanka.
             </p>

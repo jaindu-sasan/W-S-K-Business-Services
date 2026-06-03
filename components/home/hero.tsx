@@ -49,7 +49,7 @@ export function Hero() {
             <div className="h-[2px] w-12 bg-[#D4A017]" />
 
             <span className="text-sm font-semibold tracking-wide text-[#D4A017]">
-              WELCOME TO WSK BUSINESS SERVICES
+              WELCOME TO W S K BUSINESS SERVICES (Pvt) Ltd
             </span>
           </motion.div>
 

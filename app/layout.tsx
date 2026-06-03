@@ -12,7 +12,7 @@ const jakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'WSK Business Services | Accounting & Tax Solutions',
+  title: 'W S K Business Services (Pvt) Ltd | Accounting & Tax Solutions',
   description:
     'Premium accounting, tax planning, and business consulting services. Expert financial solutions for your business.',
   generator: 'v0.app',

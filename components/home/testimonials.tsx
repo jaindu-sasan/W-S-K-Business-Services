@@ -11,7 +11,7 @@ const testimonials = [
     role: 'Happy Client',
     image: '/images/clients/client1.png',
     review:
-      'WSK Business Services helped streamline our accounting and tax processes. Their professional guidance gave us confidence to grow our business successfully.',
+      'W S K Business Services (Pvt) Ltdes (Pvt) Ltdes (Pvt) Ltdes (Pvt) Ltdes (Pvt) Ltdes (Pvt) Ltdes (Pvt) Ltd helped streamline our accounting and tax processes. Their professional guidance gave us confidence to grow our business successfully.',
     active: false,
   },
   {
