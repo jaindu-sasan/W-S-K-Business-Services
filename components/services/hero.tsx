@@ -41,7 +41,7 @@ export function ServicesHero() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#F5F7FA]/70 via-[#F5F7FA]/60 to-[#F5F7FA]/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#06162B]/5 via-[#0B1F3A]/72 to-[#06162B]/84" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="relative md:min-h-[440px]">
@@ -57,11 +57,11 @@ export function ServicesHero() {
             >
               <div className="grid w-full items-start gap-8 lg:grid-cols-[1.05fr_0.95fr]">
                 <div className="text-center lg:text-left">
-                  <h1 className="text-5xl font-bold leading-tight text-[#0B1F3A] md:text-6xl lg:text-7xl">
+                  <h1 className="text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
                     Our Services
                   </h1>
 
-                  <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#5B6472] lg:mx-0">
+                  <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/80 lg:mx-0">
                     Trusted accounting, taxation, payroll, and business consultancy services designed to help
                     organisations make confident decisions and operate with clarity.
                   </p>
@@ -78,7 +78,7 @@ export function ServicesHero() {
                     </Link>
                     <a
                       href="#services-overview"
-                      className="inline-flex items-center justify-center rounded-full border border-[#E5EAF0] bg-white px-6 py-3 font-semibold text-[#0B1F3A] shadow-sm transition-all hover:border-[#D4A017]/50 hover:text-[#D4A017]"
+                      className="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-6 py-3 font-semibold text-white shadow-sm backdrop-blur-sm transition-all hover:border-[#D4A017]/60 hover:text-[#D4A017]"
                     >
                       Explore Services
                     </a>
@@ -87,7 +87,7 @@ export function ServicesHero() {
 
                 <div className="mt-2 ml-auto max-w-lg space-y-3 lg:mt-6">
                   <div
-                    className="relative min-h-[160px] overflow-hidden rounded-xl border border-white/20 p-4 shadow-sm"
+                    className="relative min-h-[160px] overflow-hidden rounded-xl p-4 shadow-lg ring-1 ring-inset ring-[#D4A017]/25"
                     style={{
                       backgroundImage: "url('/MCS.png')",
                       backgroundSize: 'cover',
@@ -95,7 +95,7 @@ export function ServicesHero() {
                       backgroundRepeat: 'no-repeat',
                     }}
                   >
-                    <div className="absolute inset-0 bg-[#0B1F3A]/60" />
+                    <div className="absolute inset-0 bg-[#0B1F3A]/65" />
                     <div className="relative z-10">
                       <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#D4A017] text-[#0B1F3A]">
                         <BriefcaseBusiness className="h-5 w-5" />
@@ -107,7 +107,7 @@ export function ServicesHero() {
                   </div>
 
                   <div
-                    className="relative min-h-[160px] overflow-hidden rounded-xl border border-white/20 p-4 shadow-sm"
+                    className="relative min-h-[160px] overflow-hidden rounded-xl p-4 shadow-lg ring-1 ring-inset ring-[#D4A017]/25"
                     style={{
                       backgroundImage: "url('/CDS.png')",
                       backgroundSize: 'cover',
@@ -115,7 +115,7 @@ export function ServicesHero() {
                       backgroundRepeat: 'no-repeat',
                     }}
                   >
-                    <div className="absolute inset-0 bg-[#0B1F3A]/60" />
+                    <div className="absolute inset-0 bg-[#0B1F3A]/65" />
                     <div className="relative z-10">
                       <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#D4A017] text-[#0B1F3A]">
                         <Building2 className="h-5 w-5" />
@@ -141,15 +141,15 @@ export function ServicesHero() {
                 <ShieldCheck className="h-6 w-6" />
               </div>
 
-              <h2 className="text-4xl font-bold leading-tight text-[#0B1F3A] md:text-5xl">
+              <h2 className="text-4xl font-bold leading-tight text-white md:text-5xl">
                 Business support built around your goals.
               </h2>
 
               <div className="mt-8 grid gap-4 text-left sm:grid-cols-2">
                 {highlightItems.map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-white/70 bg-white/70 p-5 shadow-sm backdrop-blur-sm">
+                  <div key={item.label} className="rounded-2xl border border-white/15 bg-white/10 p-5 shadow-sm backdrop-blur-sm">
                     <item.icon className="mb-3 h-6 w-6 text-[#D4A017]" />
-                    <p className="text-lg font-semibold text-[#0B1F3A]">{item.label}</p>
+                    <p className="text-lg font-semibold text-white">{item.label}</p>
                   </div>
                 ))}
               </div>
@@ -166,7 +166,7 @@ export function ServicesHero() {
               onClick={() => setActiveSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
               className={`h-3 w-3 rounded-full transition-colors ${
-                activeSlide === index ? 'bg-[#0B1F3A]' : 'bg-[#0B1F3A]/30 hover:bg-[#0B1F3A]/50'
+                activeSlide === index ? 'bg-[#D4A017]' : 'bg-white/40 hover:bg-white/70'
               }`}
             />
           ))}

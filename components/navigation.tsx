@@ -54,7 +54,7 @@ export function Navigation() {
             className="h-11 w-11 rounded-xl object-contain"
             priority
           />
-          <h2 className="text-[28px] font-bold text-[#0B1F3A]">WSK</h2>
+          <h2 className="text-[15px] font-bold text-[#0B1F3A]">WSK Business Services (Pvt) Ltd</h2>
         </Link>
 
         {/* DESKTOP MENU */}
