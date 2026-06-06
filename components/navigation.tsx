@@ -28,8 +28,8 @@ export function Navigation() {
     { name: 'Services', href: '/services' },
     { name: 'Tax Calculator', href: '/tax-calculator' },
     /*
-    { name: 'Projects', href: '/projects' },
-    { name: 'Blog', href: '/blog' },*/
+    { name: 'Projects', href: '/projects' },*/
+    { name: 'Blog', href: '/blog' },
   ];
 
   const isActiveLink = (href: string) =>
