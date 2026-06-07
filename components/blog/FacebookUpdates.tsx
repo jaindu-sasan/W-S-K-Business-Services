@@ -106,9 +106,6 @@ export function FacebookUpdates() {
             <h2 className="text-3xl font-bold text-primary md:text-4xl">
               Latest posts from the last 2 weeks
             </h2>
-            <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-              New posts shared on the official WSK Business Services Facebook page will appear here automatically after the API is connected.
-            </p>
           </div>
 
           <a
