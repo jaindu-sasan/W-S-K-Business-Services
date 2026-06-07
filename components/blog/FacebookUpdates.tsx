@@ -103,9 +103,6 @@ export function FacebookUpdates() {
               <Facebook className="h-4 w-4" />
               Facebook Updates
             </div>
-            <h2 className="text-3xl font-bold text-primary md:text-4xl">
-              Latest posts from the last 2 weeks
-            </h2>
           </div>
 
           <a
@@ -172,9 +169,6 @@ export function FacebookUpdates() {
               <Facebook className="h-7 w-7 text-primary" />
             </div>
             <h3 className="text-xl font-bold text-primary">No recent Facebook posts</h3>
-            <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-              No posts were found from the last 2 weeks. When WSK uploads a new Facebook post, it will show here after the Facebook API is connected.
-            </p>
           </div>
         )}
       </div>
