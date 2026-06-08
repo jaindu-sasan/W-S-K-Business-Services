@@ -17,6 +17,7 @@ import {
   Building2,
 } from 'lucide-react';
 import { CTA } from '@/components/home/cta';
+import { MissionValuesSection } from '@/components/about/mission-values-section';
 
 export default function AboutPage() {
   return (
@@ -149,6 +150,8 @@ export default function AboutPage() {
     </div>
   </div>
 </section>
+      <MissionValuesSection />
+
       {/* COMPANY HEAD / LEADERSHIP */}
       <section className="bg-white py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
