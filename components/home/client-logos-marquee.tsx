@@ -72,10 +72,10 @@ export function ClientLogosMarquee() {
         >
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-[#D4A017]">Our Clients</p>
           <h2 className="text-3xl font-bold leading-tight text-[#0B1F3A] md:text-5xl">
-            Trusted By Our Valued Clients
+            Trusted Across Sectors
           </h2>
           <p className="mt-5 text-base leading-8 text-[#5B6472] md:text-lg">
-            We are proud to support organisations across diverse industries with reliable accounting and business advisory services.
+            Delivering dependable business advisory and operational support to organisations worldwide.
           </p>
         </motion.div>
 

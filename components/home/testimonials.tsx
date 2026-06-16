@@ -64,9 +64,9 @@ export function Testimonials() {
           </p>
 
           <h2 className="mx-auto max-w-4xl text-4xl font-bold leading-tight text-[#0B1F3A] md:text-6xl">
-            Trusted By Businesses
+            The Trusted 
             <span className="block">
-              Across Sri Lanka
+              Choice for Business
             </span>
           </h2>
         </motion.div>

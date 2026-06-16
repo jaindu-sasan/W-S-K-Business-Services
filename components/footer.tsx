@@ -131,7 +131,7 @@ export function Footer() {
               <MapPin className="w-5 h-5 text-accent" />
               <div>
                 <p className="text-base text-primary-foreground/70">Address</p>
-                <p className="text-lg font-semibold">329/1, Nawala Road, Nawala</p>
+                <p className="text-lg font-semibold">No. 329/1 Nawala Rd, Sri Jayawardenepura Kotte. 10250</p>
               </div>
             </div>
           </div>

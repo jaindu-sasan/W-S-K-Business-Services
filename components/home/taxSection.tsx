@@ -58,7 +58,7 @@ export function TaxSection() {
   }, [statsInView]);
 
   return (
-    <section className="relative overflow-hidden bg-[#F5F7FA] py-24">
+    <section className="relative overflow-hidden bg-[#F3F0EA] py-14 md:py-16">
       <div className="absolute -right-24 top-20 h-[420px] w-[420px] rounded-full bg-[#D4A017]/10 blur-3xl" />
       <div className="absolute -left-24 bottom-10 h-[360px] w-[360px] rounded-full bg-[#0B1F3A]/5 blur-3xl" />
 

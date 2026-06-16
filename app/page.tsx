@@ -17,9 +17,10 @@ export default function Home() {
       <Navigation />
       <Hero />
       <Services />
-      <TaxSection/>
-      <AboutUs/>
       <ClientLogosMarquee />
+      <TaxSection/>
+    
+      
       <Stats />
       <Testimonials/>
       
