@@ -5,12 +5,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import {
   ArrowRight,
-  BriefcaseBusiness,
-  Building2,
   CheckCircle2,
   FileText,
+  Landmark,
   LineChart,
   ShieldCheck,
+  Target,
 } from 'lucide-react';
 
 const highlightItems = [
@@ -98,10 +98,10 @@ export function ServicesHero() {
                     <div className="absolute inset-0 bg-[#0B1F3A]/65" />
                     <div className="relative z-10">
                       <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#D4A017] text-[#0B1F3A]">
-                        <BriefcaseBusiness className="h-5 w-5" />
+                        <Landmark className="h-5 w-5" />
                       </div>
                       <h3 className="text-xl font-bold leading-tight text-white md:text-2xl">
-                        Management Consultancy Services
+                        Financial, Taxation & Compliance
                       </h3>
                     </div>
                   </div>
@@ -118,10 +118,10 @@ export function ServicesHero() {
                     <div className="absolute inset-0 bg-[#0B1F3A]/65" />
                     <div className="relative z-10">
                       <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#D4A017] text-[#0B1F3A]">
-                        <Building2 className="h-5 w-5" />
+                        <Target className="h-5 w-5" />
                       </div>
                       <h3 className="text-xl font-bold leading-tight text-white md:text-2xl">
-                        Corporate Development Services
+                        Strategy, Growth & Advisory
                       </h3>
                     </div>
                   </div>
