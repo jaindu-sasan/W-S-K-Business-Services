@@ -14,7 +14,7 @@ export function Stats() {
 
     const duration = 2000;
     const start = Date.now();
-    const targets = { clients: 500, revenue: 50, experience: 15, success: 98 };
+    const targets = { clients: 1000, revenue: 50, experience: 15, success: 98 };
 
     const timer = setInterval(() => {
       const elapsed = Date.now() - start;
@@ -39,11 +39,7 @@ export function Stats() {
       label: 'Satisfied Clients',
       icon: Users,
     },
-    {
-      value: `$${displayValues.revenue}M+`,
-      label: 'Tax Savings Delivered',
-      icon: BadgeDollarSign,
-    },
+
     {
       value: `${displayValues.experience}+`,
       label: 'Years Experience',
@@ -59,7 +55,7 @@ export function Stats() {
   return (
     <section ref={ref} className="border-y border-border bg-card/50 py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}

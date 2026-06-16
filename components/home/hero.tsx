@@ -31,9 +31,12 @@ export function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#F5F7FA]">
-      <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-14 px-6 py-24 lg:grid-cols-2 lg:px-8">
-        
+    <section className="relative overflow-hidden bg-[#EEF2F6]">
+      {/* Background Shapes */}
+      <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-[#0B1F3A]/5 blur-3xl" />
+      <div className="absolute -right-40 bottom-10 h-96 w-96 rounded-full bg-[#D4A017]/15 blur-3xl" />
+
+      <div className="relative mx-auto grid min-h-[88vh] max-w-7xl items-center gap-10 px-6 pb-12 pt-28 md:pb-14 lg:grid-cols-2 lg:gap-14 lg:px-8">
         {/* LEFT CONTENT */}
         <motion.div
           variants={containerVariants}
@@ -48,8 +51,8 @@ export function Hero() {
           >
             <div className="h-[2px] w-12 bg-[#D4A017]" />
 
-            <span className="text-sm font-semibold tracking-wide text-[#D4A017]">
-              WELCOME TO W S K BUSINESS SERVICES (Pvt) Ltd
+            <span className="text-sm font-semibold uppercase tracking-[0.25em] text-[#D4A017]">
+              Welcome
             </span>
           </motion.div>
 
@@ -58,12 +61,12 @@ export function Hero() {
             variants={itemVariants}
             className="max-w-2xl text-5xl font-semibold leading-[1.05] tracking-tight text-[#0B1F3A] md:text-7xl"
           >
-            Guiding You
+            Fuelling
             <br />
-            Toward Financial
+            Sustainable
             <br />
             <span className="text-[#D4A017]">
-              Confidence.
+              Growth
             </span>
           </motion.h1>
 
@@ -72,47 +75,48 @@ export function Hero() {
             variants={itemVariants}
             className="mt-8 max-w-xl text-lg leading-relaxed text-slate-600"
           >
-            We provide trusted accounting, taxation,
-            payroll, and business consultancy services
-            to help your company grow with confidence
-            and financial clarity.
+            We deliver trusted financial and advisory services that fuel sustainable
+            growth, giving businesses the clarity and confidence to scale responsibly.
+            Through practical guidance, compliance support, and capacity building,
+            we help organisations optimise performance, manage risk, and achieve
+            long-term success.
           </motion.p>
 
           {/* Button */}
-       <motion.div
-  variants={itemVariants}
-  className="mt-10 flex flex-wrap gap-4"
->
-  <Link
-    href="/services"
-    className="group inline-flex items-center gap-3 rounded-full bg-[#0B1F3A] px-8 py-4 text-white transition-all duration-300 hover:bg-[#10284A]"
-  >
-    Discover More
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 flex flex-wrap gap-4"
+          >
+            <Link
+              href="/services"
+              className="group inline-flex items-center gap-3 rounded-full bg-[#0B1F3A] px-8 py-4 text-white shadow-lg transition-all duration-300 hover:bg-[#10284A]"
+            >
+              Discover More
 
-    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#0B1F3A] transition-transform duration-300 group-hover:translate-x-1">
-      <ArrowRight size={16} />
-    </span>
-  </Link>
-</motion.div>
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#0B1F3A] transition-transform duration-300 group-hover:translate-x-1">
+                <ArrowRight size={16} />
+              </span>
+            </Link>
+          </motion.div>
         </motion.div>
 
-        {/* RIGHT SIDE */}
-        <div className="relative flex items-center justify-center">
-          
-         
-
+        {/* RIGHT SIDE IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, x: 35 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="relative flex items-center justify-center"
+        >
           {/* Trusted Card */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.7 }}
-            className="absolute -left-6 top-5 z-20 rounded-full bg-[#0B1F3A] px-4 py-3 shadow-2xl"
+            className="absolute -left-5 top-8 z-20 rounded-full bg-[#0B1F3A] px-4 py-3 shadow-2xl md:left-2 lg:-left-8"
           >
             <div className="flex items-center gap-3">
-
               {/* Client Images */}
               <div className="flex -space-x-4">
-
                 <div className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white">
                   <Image
                     src="/images/clients/client1.png"
@@ -140,7 +144,6 @@ export function Hero() {
                   />
                 </div>
 
-                {/* Plus Circle */}
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-[#22C55E] text-lg font-bold text-white">
                   +
                 </div>
@@ -151,7 +154,7 @@ export function Hero() {
                 <p className="text-xl font-bold text-white">
                   <CountUp
                     start={0}
-                    end={500}
+                    end={1000}
                     duration={3}
                     separator=","
                   />
@@ -165,18 +168,17 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Main Image */}
-          <div className="relative z-10 overflow-hidden rounded-[40px] shadow-2xl">
+          {/* Main Full Image */}
+          <div className="relative h-[430px] w-full overflow-hidden rounded-[40px] border-[8px] border-white bg-white shadow-2xl md:h-[500px] lg:h-[540px]">
             <Image
               src="/images/hero-business1.png"
               alt="Business Professional"
-              width={850}
-              height={700}
+              fill
               priority
-              className="h-auto w-full max-w-[700px] object-cover"
+              className="object-cover object-center"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

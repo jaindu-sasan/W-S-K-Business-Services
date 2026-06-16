@@ -23,7 +23,7 @@ export function ContactHero() {
     {
       icon: MapPin,
       label: 'Office',
-      value: 'No. 329/1 Nawala Rd, Sri Jayawardenepura Kotte.',
+      value: 'No. 329/1 Nawala Rd, Sri Jayawardenepura Kotte 10250.',
       href: WSK_GOOGLE_MAPS_URL,
       external: true,
       title: 'Open W S K Business Services (Pvt) Ltd location in Google Maps',

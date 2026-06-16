@@ -20,11 +20,11 @@ export function CTA() {
           className="w-full text-center space-y-5"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-balance">
-            Ready to Transform Your Finances?
+            Ready to unlock smarter growth?
           </h2>
 
           <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto text-balance">
-            Let our expert team help you save money, grow your business, and achieve your financial goals.
+            Contact us now for a tailored plan that cuts costs, boosts growth, and delivers results.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
