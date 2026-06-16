@@ -205,9 +205,7 @@ export function Services() {
 
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A]/45 via-transparent to-transparent" />
 
-                  <div className="absolute left-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#0B1F3A] text-xs font-semibold text-white shadow-lg">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
+
                 </div>
 
                 {/* Content */}
