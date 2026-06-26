@@ -85,9 +85,9 @@ export function Calculator() {
   const { annualIncome, annualTax, quarterPayment, rows } = useMemo(() => {
     const annual = Math.max(0, submittedAnnualIncome);
 
-    // Annual slabs equivalent to monthly relief of 150,000.
+    // Annual slabs equivalent to annual relief of 1,800,000.
     const annualSlabs = [
-      { label: 'Up to 150,000', width: 1800000, rate: 0, rateLabel: 'Relief' },
+      { label: 'Up to 1,800,000', width: 1800000, rate: 0, rateLabel: 'Relief' },
       { label: '1st 1,000,000', width: 1000000, rate: 0.06, rateLabel: '6%' },
       { label: '2nd 500,000', width: 500000, rate: 0.18, rateLabel: '18%' },
       { label: '3rd 500,000', width: 500000, rate: 0.24, rateLabel: '24%' },
@@ -225,7 +225,7 @@ export function Calculator() {
                 Annual Income Tax Calculator
               </motion.h2>
               <p className="text-lg text-muted-foreground">Tax Calculator w.e.f 01.04.2025</p>
-              <p className="text-sm text-muted-foreground">Relief: up to LKR 150,000 per month (LKR 1,800,000 annually)</p>
+              <p className="text-sm text-muted-foreground">Relief: up to LKR 1,800,000 annually</p>
 
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-foreground">Enter your Annual Income (taxable)</label>
