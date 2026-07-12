@@ -12,6 +12,7 @@ export function ContactForm() {
     company: '',
     service: 'tax-planning',
     message: '',
+    website: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,15 +57,6 @@ export function ContactForm() {
       }
 
       setSubmitted(true);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to send message. Please try again.';
-      setSubmitError(message);
-    } finally {
-      setIsSubmitting(false);
-    }
-
-    // Reset after 3 seconds
-    setTimeout(() => {
       setFormData({
         name: '',
         email: '',
@@ -72,9 +64,17 @@ export function ContactForm() {
         company: '',
         service: 'tax-planning',
         message: '',
+        website: '',
       });
-      setSubmitted(false);
-    }, 3000);
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 3000);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to send message. Please try again.';
+      setSubmitError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -116,6 +116,17 @@ export function ContactForm() {
             transition={{ duration: 0.6 }}
             className="space-y-6 rounded-lg border border-[#DCE6F2] bg-[#EEF4FB] p-8 md:p-12"
           >
+            <input
+              type="text"
+              name="website"
+              value={formData.website}
+              onChange={handleChange}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+            />
+
             {/* Name & Email Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
