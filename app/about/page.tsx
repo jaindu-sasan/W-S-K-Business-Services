@@ -57,7 +57,7 @@ export default function AboutPage() {
     {
       name: 'Madhu Weththasinghe',
       role: 'Senior Consultant',
-      image: '/images/team/team-2.jpg',
+      image: '/images/team/team-2.jpeg',
     },
   ];
 
@@ -261,7 +261,7 @@ export default function AboutPage() {
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
 
