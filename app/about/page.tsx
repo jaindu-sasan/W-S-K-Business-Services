@@ -46,6 +46,8 @@ export default function AboutPage() {
       title: 'Support Long-Term Growth',
       text: 'We help businesses stay organised, improve performance, and move toward sustainable growth.',
     },
+
+    
   ];
 
   const leaders = [
@@ -54,11 +56,29 @@ export default function AboutPage() {
       role: 'Founder / CEO',
       image: '/images/team/team-1.jpg',
     },
+       {
+      name: 'Ramzeen Ismail',
+      role: 'Senior Business Consultant',
+      image: '/images/team/team-3.jpg',
+    },
+    {
+      name: 'Dilanjalee Siriwardena',
+      role: 'Deputy CEO/Head of Restructuring, Enterprise Advisory and Corporate Governance. ',
+      image: '/images/team/team-5.jpeg',
+    },
     {
       name: 'Madhu Weththasinghe',
-      role: 'Senior Consultant',
+      role: 'Head of Tax and Regulatory',
       image: '/images/team/team-2.jpeg',
     },
+   
+    {
+      name: 'Tharoosha Jayalath',
+      role: 'Associate Manager - Corporate Governance & Secretarial Services',
+      image: '/images/team/team-4.jpg',
+    },
+
+   
   ];
 
   return (
@@ -228,58 +248,88 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* LEADERSHIP */}
-      <section className="bg-[#EAF1F8] py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-[#D4A017]">
-              Leadership
-            </p>
+{/* LEADERSHIP */}
+<section className="bg-[#EAF1F8] py-24">
+  <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    {/* Heading */}
+    <div className="mx-auto mb-16 max-w-3xl text-center">
+      <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-[#D4A017]">
+        Leadership
+      </p>
 
-            <h2 className="text-4xl font-semibold leading-tight tracking-[-0.03em] text-[#0B1F3A] md:text-5xl">
-              Meet Our Company Heads
-            </h2>
+      <h2 className="text-4xl font-semibold leading-tight tracking-[-0.03em] text-[#0B1F3A] md:text-5xl">
+        Meet Our Company Heads
+      </h2>
 
-            <p className="mt-5 text-[17px] leading-8 text-slate-600">
-              Our leadership team brings professional knowledge, business
-              experience, and client-focused service.
-            </p>
+      <p className="mt-5 text-[17px] leading-8 text-slate-600">
+        Our leadership team brings professional knowledge, business
+        experience, and client-focused service.
+      </p>
+    </div>
+
+    {/* Leadership Grid */}
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-6">
+      {leaders.map((member, index) => (
+        <motion.div
+          key={member.name}
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.15 }}
+          viewport={{ once: true }}
+          className={`
+            group overflow-hidden rounded-[30px]
+            border border-white/80
+            bg-white
+            shadow-sm
+            transition-all duration-300
+            hover:-translate-y-2
+            hover:shadow-xl
+
+            xl:col-span-2
+
+            ${
+              index === 3
+                ? 'xl:col-start-2'
+                : ''
+            }
+
+            ${
+              index === 4
+                ? 'xl:col-start-4'
+                : ''
+            }
+          `}
+        >
+          {/* Gold Accent */}
+          <div className="h-2 w-full bg-[#D4A017]" />
+
+          {/* Image */}
+          <div className="relative h-[360px] overflow-hidden">
+            <Image
+              src={member.image}
+              alt={member.name}
+              fill
+              className="object-contain transition-transform duration-500 group-hover:scale-105"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A]/70 via-[#0B1F3A]/20 to-transparent" />
           </div>
 
-          <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
-            {leaders.map((member, index) => (
-              <motion.div
-                key={member.role}
-                initial={{ opacity: 0, y: 35 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15 }}
-                viewport={{ once: true }}
-                className="overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
-              >
-                <div className="relative h-[340px]">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+          {/* Content */}
+          <div className="p-7 text-center">
+            <h3 className="text-2xl font-semibold text-[#0B1F3A]">
+              {member.name}
+            </h3>
 
-                <div className="p-7 text-center">
-                  <h3 className="text-2xl font-semibold text-[#0B1F3A]">
-                    {member.name}
-                  </h3>
-
-                  <p className="mt-2 text-[15px] font-medium text-[#D4A017]">
-                    {member.role}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+            <p className="mt-2 text-[15px] font-medium leading-6 text-[#D4A017]">
+              {member.role}
+            </p>
           </div>
-        </div>
-      </section>
-
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
     
       <CTA />
       <Footer />
