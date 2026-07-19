@@ -119,7 +119,7 @@ export function Hero() {
               <div className="flex -space-x-4">
                 <div className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white">
                   <Image
-                    src="/images/clients/client1.png"
+                    src="/images/clients/client1.jpeg"
                     alt="Client 1"
                     fill
                     className="object-cover"
@@ -128,7 +128,7 @@ export function Hero() {
 
                 <div className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white">
                   <Image
-                    src="/images/clients/client2.png"
+                    src="/images/clients/client2.jpeg"
                     alt="Client 2"
                     fill
                     className="object-cover"
@@ -137,7 +137,7 @@ export function Hero() {
 
                 <div className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white">
                   <Image
-                    src="/images/clients/client3.png"
+                    src="/images/clients/client3.jpg"
                     alt="Client 3"
                     fill
                     className="object-cover"
